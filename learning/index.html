@@ -1,0 +1,34 @@
+<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+   <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+   <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+   <link rel="stylesheet" href="..xtable.css">
+   <!-- <script>
+   $( function() {
+     $( "#datepicker" ).datepicker({
+       showButtonPanel: true
+     });
+   } );
+   </script> -->
+
+   <script>
+   $(function() {
+   var firstdate = $('#firstdatepicker').datepicker({ dateFormat: 'YY- mm-dd' }).val();
+   });
+   </script>
+
+
+   <script>
+   $(function() {
+   var book_date = $('#lastdatepicker').datepicker({ dateFormat: 'yy-mm-dd' }).val();
+   });
+   </script>
+</head>
+<body>
+<form method="post" action="archive.php">
+    <p>First Date: <input name = "firstdatepicker" type="text"  id="firstdatepicker"></p>
+
+   <p>Last Date: <input name = "lastdatepicker" type="text"  id="lastdatepicker"></p>
+
+
+
+   </form>

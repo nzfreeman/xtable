@@ -1,10 +1,9 @@
 <!DOCTYPE html>
 <html>
 <head><meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-	<title>Xtable</title>
-  <link rel="stylesheet" href="xtable.css">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Xtable</title>
+<link rel="stylesheet" href="xtable.css">
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <link href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css" rel="Stylesheet" type="text/css" />
@@ -13,7 +12,7 @@
 <body>
           <!-- Calendar date and time   begin here -->
 <div>
-    <h2><p align="center" id="currnt date and time"> </p><h2>
+    <h2 align="center" id="currnt date and time"> </h2>
         <script>
         var today = new Date();
         var month = new Array();
@@ -34,6 +33,7 @@
         // var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
         // var dateTime = date+' '+time;
         var dateTime = date;
+        <!-- javascript output 출력 -->
         document.getElementById("currnt date and time").innerHTML = dateTime;
         </script>
 </div>
@@ -42,7 +42,6 @@
     <h3>Xtable Booking System</h3>
     This is not fully functional yet. 
 </div>
-
 <div class="Booking_field">
   <div class="w3-row-padding">
      <div class="w3-third">
@@ -55,6 +54,8 @@
         <div class="booking_input_list_field">
               <!--jquery Date picker input field -->
           <li id="date_input"> Date:   <input type="text" id="datepicker"></li>
+          
+          
           <li>  Time:  <input id="time_field" placeholder="When you will come?" type="text" /></li>
           <li> Name:  <input id="name_field" placeholder="Enter name." type="text" /> </li>
           <li>  Phone:  <input id="phone_field" placeholder="Enter contact number" type="text"/>
@@ -65,36 +66,56 @@
             <button id="submit_btn" onclick="storeData()" align="center">Please click here</button>
           </li> 
         </div>
-            <!--jquery Date picker starts -->
-          <script>
-          $(function() {
-            var book_date = $('#datepicker').datepicker({ dateFormat: 'dd-mm-yy' }).val();
-          });
-          </script>
+<!--jquery Date picker starts -->
+  <input type="text" id="mm">
+   <input id="yy" type="text" >
+<script>  
+        /*   Jquery 예제
+        Basic syntax is: $(selector).action()
+        A $ sign to define/access jQuery
+        A (selector) to "query (or find)" HTML elements
+        A jQuery action() to be performed on the element(s)
+    Examples:
+    $(this).hide() - hides the current element.
+    $("p").hide() - hides all <p> elements.
+    $(".test").hide() - hides all elements with class="test".
+    $("#test").hide() - hides the element with id="test".
+    
+    
+    $(document).ready(function(){
+            // jQuery methods go here...
+       }); 
+*/
+           // #datepicker 는 id명임. jquery의 셀렉터 문법은 $(" 선택할내용     " ).click(functon)
+           
+          // $(function() {
+          //   var book_date1 = $('#datepicker').datepicker({ dateFormat: 'dd-mm-yy' }).val();
+          // });
+          $( function() {
+$( "#datepicker" ).datepicker({ dateFormat: 'dd-mm-yy' }).val();
+    })
+    </script>
+
                 <!--jquery Date picker ends-->
           </div>
         </div>
   <!-- showing Current booking list -->
    <div class="w3-third">
-    <div class="Booking_output_field">
-      <p><h2> Booking List</h2> </p>
-          <h3>Name</h3>
+    <div id="Booking_output_field">
+      <p> Booking List </p>
+          <h5>Name</h5>
           <p>Email : user@email.com</p>
     </div>
   </div>
   </div>
 </div>
-
-  
 <!-- Firebase App (the core Firebase SDK) is always required and must be listed first -->
 <script src="https://www.gstatic.com/firebasejs/7.14.2/firebase-app.js"></script>
 <script src="https://www.gstatic.com/firebasejs/7.14.2/firebase-auth.js"></script>
 <script src="https://www.gstatic.com/firebasejs/7.14.2/firebase-firestore.js"></script>
-
 <!-- TODO: Add SDKs for Firebase products that you want to use
      https://firebase.google.com/docs/web/setup#available-libraries -->
 <script src="https://www.gstatic.com/firebasejs/7.14.2/firebase-analytics.js"></script>
-
 <script>
   // Your web app's Firebase configuration
   var firebaseConfig = {
@@ -112,27 +133,6 @@
   var db=firebase.firestore()
 </script>
 <script src="index.js">
-    
 </script>
-
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

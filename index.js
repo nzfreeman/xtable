@@ -3,37 +3,25 @@
 
 
 function storeData() {
-  // var nameText = document.getElementById("name_field").value;
-  // var phoneText = document.getElementById("phone_field").value;
-  // var how_manyText = document.getElementById("how_many_field").value;
-  // var anythingText = document.getElementById("anything_field").value;
-  // var timeText = document.getElementById("time_field").value;
-  // var book_date = document.getElementById("datepicker").value;
+  var nameText = document.getElementById("name_field").value;
+  var phoneText = document.getElementById("phone_field").value;
+  var how_manyText = document.getElementById("how_many_field").value;
+  var anythingText = document.getElementById("anything_field").value;
+  var timeText = document.getElementById("time_field").value;
+  var book_date = document.getElementById("datepicker").value;
 
-  var nameText = document.getElementById("name_field");
-  var phoneText = document.getElementById("phone_field");
-  var how_manyText = document.getElementById("how_many_field");
-  var anythingText = document.getElementById("anything_field");
-  var timeText = document.getElementById("time_field");
-  var book_date = document.getElementById("datepicker");
-  var mm = 
-  document.getElementById("mm");
-  var yy =
-  document.getElementById("yy");
 // 이메일 필드(email_field)는 index.html속의 필드명과 일치해야 함  
   //  여기서 변경하면 바뀌나?
   // JqueryUI datepicker의 value값을 받아 오기
-  db.collection("asd").doc("1").set({
+  db.collection("ASD2").doc("1").set({
       name: nameText,
       phone: phoneText,
       how_many: how_manyText,
       anything: anythingText,
       time: timeText,
       date: book_date,
-      
-      
-
-    })
+      day: "ddd",
+        })
     .then(function() {
       console.log("Document successfully written");
     })

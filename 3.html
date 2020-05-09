@@ -1,0 +1,119 @@
+<html>
+<title>Xtable Template</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<link href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css" rel="Stylesheet" type="text/css" />
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-black.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" type="text/css" />
+<!-- jQuery 기본 js파일 -->
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+<!-- jQuery UI 라이브러리 js파일 -->
+<script src="http://code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>
+
+
+<!-- <link rel="stylesheet" href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" type="text/css" />  
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>  
+<script src="http://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script> -->
+
+<body>
+  <p>선택일 : <input type="text" id="date"></p>
+
+  <p>textbox를 클릭하면 <String>캘린더</String> 표시</p>
+
+  연도:<p id="year"></p>
+  월:<p id="month"></p>
+  일:<p id="day"></p>
+  요일:<p id="mydate"></p>
+  script.
+  <script>
+    // <script type="text/javascript">
+    $(function() {
+      $("#date").datepicker({
+        dateFormat: "yy/mm/dd",
+        dayNamesMin: ["일", "월", "화", "수", "목", "금", "토"],
+        monthNames: ["1월", "2월", "3월", "4월", "5월", "6월", "7월", "8월", "9월", "10월", "11월", "12월"],
+        onSelect: function(d) {
+          alert(d + " 선택되었습니다");
+
+          var arr = d.split("/");
+          var year = arr[0];
+          var month = arr[1];
+          var day = arr[2];
+
+          //요일 가져오기
+          //데이터를 먼저 가져오고 (숫자로 넘어옴)
+          var date = new Date($("#date").datepicker({
+            dateFormat: "yy/mm/dd"
+          }).val());
+          //일요일 0~
+          alert("date:" + date.getDay());
+          week = new Array("일", "월", "화", "수", "목", "금", "토");
+          $("#mydate").text(week[date.getDay()]);
+          $("#year").text(year);
+          $("#month").text(month);
+          $("#day").text(day);
+        }
+      });
+    });
+  </script>
+
+  <div class="main-form">
+    <h1 id="punTimes">Punny or Not!</h1>
+    Month: <input type="text" placeholder="Month: " id="Month"><br /><br />
+    Pun Category: <input type="text" placeholder="Category: " id="Category"><br /><br />
+    Pun Text: <input type="text" placeholder="Enter Text here..." id="PunText"> <br /><br />
+
+    <br /><br />
+    <button id="saveButton" onclick="storeData()">Submit</button>
+  </div>
+  <script>
+    function storeData() {
+
+      var inputPun = document.getElementById("Month").value;
+      var inputCategory = document.getElementById("Category").value;
+      var inputText = document.getElementById("PunText").value;
+      var inputText2 = document.getElementById("day").innerHTML; //datepicker에서 받은 값을 넣을때는 innerHTML을 사용해야 합니다. 
+
+
+      db.collection(inputText2).doc(inputPun).collection("Year").doc(inputPun).set({
+          Category: inputCategory,
+          PunText: inputText
+        })
+        .then(function() {
+          console.log("Doc successful");
+        })
+        .catch(function(error) {
+          console.error("Error writing doc", error);
+        });
+    }
+  </script>
+
+
+
+
+
+
+
+
+
+  <script src="scripts/datepicker.js"></script>
+
+  <!-- /*
+  파이어베이스 연결 스크립트 
+  */ -->
+  <!-- Firebase App (the core Firebase SDK) is always required and must be listed first -->
+  <script src="https://www.gstatic.com/firebasejs/7.14.2/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.14.2/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.14.2/firebase-firestore.js"></script>
+  <!-- TODO: Add SDKs for Firebase products that you want to use
+       https://firebase.google.com/docs/web/setup#available-libraries -->
+  <script src="https://www.gstatic.com/firebasejs/7.14.2/firebase-analytics.js"></script>
+
+  <script src="scripts/firestore_config.js"></script>
+  <!-- <script src = "scripts/firestore_storedata.js"></script> -->
+
+</body>

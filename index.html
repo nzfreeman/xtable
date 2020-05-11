@@ -237,26 +237,31 @@
     </script>
     <!-- 2단 분리 왼쪽 박스 종료 -->
     <!-- 2단 분리 오른쪽박스시작 -->
-    <div onload="writetofirestore()" class="w3-half w3-container">
+    <div class="w3-half w3-container">
+      <li class="input_button">
+        <button id="submit_btn2" onclick="writetofirestore()" align="center">writing sample data</button>
+      </li>
+      <li class="input_button">
+        <button id="submit_btn3" onclick="getDatafromFirestore()" align="center">getting sample data</button>
+      </li>
       <input type="text" id="booking_list">
       <script>
         function getDatafromFirestore() {
-          var docRef = db.collection(year).doc(month).collection(day).doc(table_number);
+          var docRef = db.collection("cities").doc("SF");
+
           docRef.get().then(function(doc) {
-            if (doc.exists) {
-              console.log("Document data:", doc.data());
-            } else {
-              // doc.data() will be undefined in this case
-              console.log("No such document!");
-            }
+              if (doc.exists) {
+                  console.log("Document data:", doc.data());
+                  docRef.document.getElementById('booking_list').innerHTML;
+              } else {
+                  // doc.data() will be undefined in this case
+                  console.log("No such document!");
+              }
           }).catch(function(error) {
-            console.log("Error getting document:", error);
-          });
-
-          docRef.document.getElementById("booking_list").innerHTML;
-
-        }
+              console.log("Error getting document:", error);
+          });}
       </script>
+
 <script>
 function writetofirestore(){
   var citiesRef = db.collection("cities");
@@ -279,14 +284,14 @@ function writetofirestore(){
   citiesRef.doc("BJ").set({
       name: "Beijing", state: null, country: "China",
       capital: true, population: 21500000,
-      regions: ["jingjinji", "hebei"] });
-}
-
-    </script>
+      regions: ["jingjinji", "hebei"] });}
+</script>
+    <p id="writetofirestore" type="text"> ddd</p>
     </div>
   </div>
   <br /><br />
   </div>
+
 
   <!-- 2단 분리 박스 종료 -->
   <br>

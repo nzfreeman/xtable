@@ -1,7 +1,7 @@
 <html>
 <title>Xtable Template</title>
 <!-- Header -->
-<header class="w3-container w3-theme w3-padding" id="myHeader">
+<!-- <header class="w3-container w3-theme w3-padding" id="myHeader"> -->
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
@@ -16,6 +16,7 @@
 <!-- css파일이 오류인 경우에 xtable/css로 경로를 변경하면 됩니다. -->
 </header>
 <!-- 바디섹션의 시작부분 -->
+
 <body onload="startTime()">
   <!-- Side Navigation -->
   <!-- <nav class="w3-sidebar w3-bar-block w3-card w3-animate-left w3-center" style="display:none" id="mySidebar">
@@ -26,53 +27,54 @@
   <a href="#" class="w3-bar-item w3-button">Link 3</a>
   <a href="#" class="w3-bar-item w3-button">Link 4</a>
 </nav> -->
-    <!-- <i onclick="w3_open()" class="fa fa-bars w3-xlarge w3-button w3-theme"></i>  -->
-    <div class="w3-center">
-      <!-- Header Notice postion -->
-      <h4>Xtable Booking Notice</h4>
-      <!-- Calendar date and time   begin here -->
-      <div aling="center">
-        <table align="center">
-          <tbody>
-            <tr align="center">
-              <th align="center" id="currnt date and time"></th>
-              <th align="center" id="current_time"></th>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-      <script>
-        var today = new Date();
-        var month = new Array();
-        month[0] = "Jan";
-        month[1] = "Feb";
-        month[2] = "Mar";
-        month[3] = "Apr";
-        month[4] = "May";
-        month[5] = "Jun";
-        month[6] = "Jul";
-        month[7] = "Aug";
-        month[8] = "Sep";
-        month[9] = "Oct";
-        month[10] = "Nov";
-        month[11] = "Dec";
-        var enMonth = month[today.getMonth()];
-        var date = today.getDate() + '-' + enMonth + '-' + today.getFullYear();
-        // var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
-        // var dateTime = date+' '+time;
-        var dateTime = date;
-        // <!--javascript output 출력-->
-        document.getElementById("currnt date and time").innerHTML = dateTime;
-      </script>
-      <!-- Calendar date and time  ends here -->
-      <!-- Current time -->
-      <h1 class="w3-xxxlarge w3-animate-bottom">X table booking</h1>
-      <script src="scripts/current_time.js"></script>
-      <!-- 큰제목및 버튼을 일단 숨김 -->
-      <!-- <div border-style="solid" border-width="thin" border-color="lightblue" class="w3-padding-32">
+
+<!-- <i onclick="w3_open()" class="fa fa-bars w3-xlarge w3-button w3-theme"></i>  -->
+  <div class="w3-center">
+    <!-- Header Notice postion -->
+    <h4>Xtable Booking Notice</h4>
+    <!-- Calendar date and time   begin here -->
+    <div aling="center">
+      <table align="center">
+        <tbody>
+          <tr align="center">
+            <th align="center" id="currnt date and time"></th>
+            <th align="center" id="current_time"></th>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <script>
+      var today = new Date();
+      var month = new Array();
+      month[0] = "Jan";
+      month[1] = "Feb";
+      month[2] = "Mar";
+      month[3] = "Apr";
+      month[4] = "May";
+      month[5] = "Jun";
+      month[6] = "Jul";
+      month[7] = "Aug";
+      month[8] = "Sep";
+      month[9] = "Oct";
+      month[10] = "Nov";
+      month[11] = "Dec";
+      var enMonth = month[today.getMonth()];
+      var date = today.getDate() + '-' + enMonth + '-' + today.getFullYear();
+      // var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+      // var dateTime = date+' '+time;
+      var dateTime = date;
+      // <!--javascript output 출력-->
+      document.getElementById("currnt date and time").innerHTML = dateTime;
+    </script>
+    <!-- Calendar date and time  ends here -->
+    <!-- Current time -->
+    <h1 class="w3-xxxlarge w3-animate-bottom">X table booking</h1>
+    <script src="scripts/current_time.js"></script>
+    <!-- 큰제목및 버튼을 일단 숨김 -->
+    <!-- <div border-style="solid" border-width="thin" border-color="lightblue" class="w3-padding-32">
       <button class="w3-btn w3-xlarge w3-dark-grey w3-hover-light-grey" onclick="document.getElementById('id01').style.display='block'" style="font-weight:900;">LEARN W3.CSS</button>
     </div> -->
-    </div>
+  </div>
   <!-- Modal LEARN 버튼 클릭하면 나오는 박스-->
   <!-- <div border-style="solid"  border-width="thin" border-color="lightblue"  id="id01" class="w3-modal">
     <div border-style="solid"  border-width="thin" border-color="lightblue"  class="w3-modal-content w3-card-4 w3-animate-top">
@@ -164,7 +166,7 @@
       <p hidden id="day"></p>
       <p hidden id="mydate"></p>
       <li> Time: <input id="time_field" size="21" type="text"></li>
-      <li> Name: <input id="name_field"  size="21"type="text"> </li>
+      <li> Name: <input id="name_field" size="21" type="text"> </li>
       <li> Phone: <input id="phone_field" size="21" type="text"></li>
       <li> Seats? : <input id="how_many_field" size="20" type="text"></li>
       <li> Table No.: <input id="c_table" size="18" type="text"> </li>
@@ -173,79 +175,122 @@
         <button id="submit_btn" onclick="storeData()" align="center">Please click here</button>
       </li>
     </div>
-    <!-- 2단 분리 오른쪽박스시작 -->
-    <div border-style="solid" border-width="thin" border-color="lightblue" class="w3-half w3-container">
-      <!-- 연도:<p id="year"></p>
-      월:<p id="month"></p>
-      일:<p id="day"></p>
-      요일:<p id="mydate"></p> -->
-      <script type="text/javascript">
-        $(function () {
-          $("#date").datepicker({
-            dateFormat: "D-yy-M-dd",
-            dayNamesMin: ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"],
-            monthNames: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
-            onSelect: function(d) {
-              var arr = d.split("-");
-              var year = arr[1];
-              var month = arr[2];
-              var day = arr[3];
-              var weekday = arr[0];
-                // alert(arr);
-              //요일 가져오기
-              //데이터를 먼저 가져오고 (숫자로 넘어옴)
-              var date = new Date($("#date").datepicker({
-                dateFormat: "yy-M-dd"
-              }).val());
-              //일요일 0~
-              // alert("date:" + date.getDay()); //
-              week = new Array("Su", "Mo", "Tu", "We", "Th", "Fr", "Sa");
-              // $("#mydate").text(week[date.getDay()]);
-              $("#mydate").text(weekday);
-              $("#year").text(year);
-              $("#month").text(month);
-              $("#day").text(day);
-              alert(weekday);
-            }
-          });
+    <script type="text/javascript">
+      $(function() {
+        $("#date").datepicker({
+          dateFormat: "D-yy-M-dd",
+          dayNamesMin: ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"],
+          monthNames: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+          onSelect: function(d) {
+            var arr = d.split("-");
+            var year = arr[1];
+            var month = arr[2];
+            var day = arr[3];
+            var weekday = arr[0];
+            // alert(arr);
+            //요일 가져오기
+            //데이터를 먼저 가져오고 (숫자로 넘어옴)
+            var date = new Date($("#date").datepicker({
+              dateFormat: "yy-M-dd"
+            }).val());
+            //일요일 0~
+            // alert("date:" + date.getDay()); //
+            week = new Array("Su", "Mo", "Tu", "We", "Th", "Fr", "Sa");
+            // $("#mydate").text(week[date.getDay()]);
+            $("#mydate").text(weekday);
+            $("#year").text(year);
+            $("#month").text(month);
+            $("#day").text(day);
+            alert(weekday);
+          }
         });
+      });
+    </script>
+    <script>
+      function storeData() {
+        var year_en = document.getElementById("year").innerHTML;
+        var month_en = document.getElementById("month").innerHTML;
+        var day_en = document.getElementById("day").innerHTML; //datepicker에서 받은 값을 넣을때는 innerHTML을 사용해야 합니다.
+        var c_table = document.getElementById("c_table").value;
+        var time_field = document.getElementById("time_field").value; //inputText로 받은 값을 넣을때는 value를 사용해야 합니다.
+        var name_field = document.getElementById("name_field").value;
+        var phone_field = document.getElementById("phone_field").value;
+        var how_many_field = document.getElementById("how_many_field").value;
+        var anything_field = document.getElementById("anything_field").value;
+        var weekday = document.getElementById("mydate").innerHTML
+        alert(month_en + day_en)
+        db.collection(year_en).doc(month_en).collection(day_en).doc(c_table).set({
+            Time: time_field,
+            Name: name_field,
+            Phone: phone_field,
+            Seats: how_many_field,
+            Any_request: anything_field,
+            Weekk: weekday
+          })
+          .then(function() {
+            console.log("Doc successful");
+          })
+          .catch(function(error) {
+            console.error("Error writing doc", error);
+          });
+      }
+    </script>
+    <!-- 2단 분리 왼쪽 박스 종료 -->
+    <!-- 2단 분리 오른쪽박스시작 -->
+    <div onload="writetofirestore()" class="w3-half w3-container">
+      <input type="text" id="booking_list">
+      <script>
+        function getDatafromFirestore() {
+          var docRef = db.collection(year).doc(month).collection(day).doc(table_number);
+          docRef.get().then(function(doc) {
+            if (doc.exists) {
+              console.log("Document data:", doc.data());
+            } else {
+              // doc.data() will be undefined in this case
+              console.log("No such document!");
+            }
+          }).catch(function(error) {
+            console.log("Error getting document:", error);
+          });
+
+          docRef.document.getElementById("booking_list").innerHTML;
+
+        }
       </script>
+<script>
+function writetofirestore(){
+  var citiesRef = db.collection("cities");
+  citiesRef.doc("SF").set({
+      name: "San Francisco", state: "CA", country: "USA",
+      capital: false, population: 860000,
+      regions: ["west_coast", "norcal"] });
+  citiesRef.doc("LA").set({
+      name: "Los Angeles", state: "CA", country: "USA",
+      capital: false, population: 3900000,
+      regions: ["west_coast", "socal"] });
+  citiesRef.doc("DC").set({
+      name: "Washington, D.C.", state: null, country: "USA",
+      capital: true, population: 680000,
+      regions: ["east_coast"] });
+  citiesRef.doc("TOK").set({
+      name: "Tokyo", state: null, country: "Japan",
+      capital: true, population: 9000000,
+      regions: ["kanto", "honshu"] });
+  citiesRef.doc("BJ").set({
+      name: "Beijing", state: null, country: "China",
+      capital: true, population: 21500000,
+      regions: ["jingjinji", "hebei"] });
+}
+
+    </script>
     </div>
   </div>
   <br /><br />
   </div>
-  <script>
-    function storeData() {
-      var year_en = document.getElementById("year").innerHTML;
-      var month_en = document.getElementById("month").innerHTML;
-      var day_en = document.getElementById("day").innerHTML; //datepicker에서 받은 값을 넣을때는 innerHTML을 사용해야 합니다.
-      var c_table = document.getElementById("c_table").value;
-      var time_field = document.getElementById("time_field").value;//inputText로 받은 값을 넣을때는 value를 사용해야 합니다.
-      var name_field = document.getElementById("name_field").value;
-      var phone_field = document.getElementById("phone_field").value;
-      var how_many_field = document.getElementById("how_many_field").value;
-      var anything_field = document.getElementById("anything_field").value;
-      var weekday = document.getElementById("mydate").innerHTML
-      alert(month_en+ day_en)
-      db.collection(year_en).doc(month_en).collection(day_en).doc(c_table).set({
-          Time: time_field,
-          Name: name_field,
-          Phone: phone_field,
-          Seats: how_many_field,
-          Any_request:anything_field,
-          Weekk: weekday
-        })
-        .then(function() {
-          console.log("Doc successful");
-        })
-        .catch(function(error) {
-          console.error("Error writing doc", error);
-        });
-    }
-  </script>
+
   <!-- 2단 분리 박스 종료 -->
   <br>
-<!-- 3단 박스, 4단 박스외 기타
+  <!-- 3단 박스, 4단 박스외 기타
 <div border-style="solid"  border-width="thin" border-color="lightblue"  class="w3-row w3-border">
   <div border-style="solid"  border-width="thin" border-color="lightblue"  class="w3-third w3-container w3-green">
     <h5>w3-third</h5>
@@ -540,7 +585,7 @@
   </div>
 </div>
 -->
-<!-- Accordions
+  <!-- Accordions
 <hr>
 <h2 class="w3-center">Accordions</h2>
 <button onclick="myAccFunc('Demo1')" class="w3-padding-16 w3-theme w3-button w3-block w3-left-align">Open Section 1</button>

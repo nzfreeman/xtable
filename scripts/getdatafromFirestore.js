@@ -1,6 +1,5 @@
 <input type = "text" id = "booking_list" >
   <script>
-  function getDatafromFirestore() {
     var docRef = db.collection(year).doc(month).collection(day).doc(table_number);
     docRef.get().then(function(doc) {
       if (doc.exists) {
@@ -13,9 +12,6 @@
       console.log("Error getting document:", error);
     });
 
-    docRef.document.getElementById("booking_list").innerHTML;
-
+    docRef.document.getElementById("booking_list").value=temp;
   }
-
-  <
-  /script>
+  </script>

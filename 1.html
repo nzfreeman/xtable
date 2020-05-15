@@ -3,15 +3,35 @@
 <title>Xtable Template</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- The core Firebase JS SDK is always required and must be listed first -->
+<script src="https://www.gstatic.com/firebasejs/7.14.4/firebase-app.js"></script>
+
+<!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+<script src="https://www.gstatic.com/firebasejs/7.14.4/firebase-analytics.js"></script>
+
+<script>
+  // Your web app's Firebase configuration
+  var firebaseConfig = {
+    apiKey: "AIzaSyAeRSo9jM53_-3FN779azh2cgP50kNF4dA",
+    authDomain: "freeman-ondal.firebaseapp.com",
+    databaseURL: "https://freeman-ondal.firebaseio.com",
+    projectId: "freeman-ondal",
+    storageBucket: "freeman-ondal.appspot.com",
+    messagingSenderId: "316720926059",
+    appId: "1:316720926059:web:e90aa4e1596021b920d02e",
+    measurementId: "G-4QJ9N6JLLQ"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+  firebase.analytics();
+</script>
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <link href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css" rel="Stylesheet" type="text/css" />
-<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-<link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-black.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css">
 <!-- css파일이 오류인 경우에 xtable/css로 경로를 변경하면 됩니다. -->
 <!-- 바디섹션의 시작부분 -->
-
 <body onload="startTime()">
   <!-- Side Navigation -->
   <!-- <nav class="w3-sidebar w3-bar-block w3-card w3-animate-left w3-center" style="display:none" id="mySidebar">
@@ -40,7 +60,6 @@
         </table>
       </div>
       <!-- <h6> 아니 진짜 <span id="currnt_time"></span> Today is : <span id="currnt date and time">  and the time is : </span>  </h6> -->
-
       <script>
         var today = new Date();
         var month = new Array();
@@ -61,7 +80,6 @@
         // var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
         // var dateTime = date+' '+time;
         var dateTime = date;
-
         // <!--javascript output 출력-->
         document.getElementById("currnt date and time").innerHTML = dateTime;
       </script>
@@ -78,7 +96,7 @@
   <!-- Modal LEARN 버튼 클릭하면 나오는 박스-->
   <!-- <div border-style="solid"  border-width="thin" border-color="lightblue"  id="id01" class="w3-modal">
     <div border-style="solid"  border-width="thin" border-color="lightblue"  class="w3-modal-content w3-card-4 w3-animate-top">
-      <header class="w3-container w3-theme-l1"> 
+      <header class="w3-container w3-theme-l1">
         <span onclick="document.getElementById('id01').style.display='none'"
         class="w3-button w3-display-topright">×</span>
         <h4>Oh snap! We just showed you a modal..</h4>
@@ -93,9 +111,9 @@
       </footer>
     </div>
 </div> -->
-  <!-- 
+  <!--
 <div border-style="solid"  border-width="thin" border-color="lightblue"  class="w3-row-padding w3-center w3-margin-top">
-   //좌측 박스 시작 
+   //좌측 박스 시작
 <div border-style="solid"  border-width="thin" border-color="lightblue"  class="w3-third">
   <div border-style="solid"  border-width="thin" border-color="lightblue"  class="w3-card w3-container" style="min-height:460px">
   <h3>Responsive</h3><br>
@@ -106,8 +124,7 @@
   <p>PC Tablet and Mobile</p>
   </div>
 </div>
-
-//가운데 박스 시작 
+//가운데 박스 시작
 <div border-style="solid"  border-width="thin" border-color="lightblue"  class="w3-third">
   <div border-style="solid"  border-width="thin" border-color="lightblue"  class="w3-card w3-container" style="min-height:460px">
   <h3>Standard CSS</h3><br>
@@ -118,9 +135,7 @@
   <p>No JavaScript library</p>
   </div>
 </div>
-
-
-// 오른쪽 박스 시작  
+// 오른쪽 박스 시작
 <div border-style="solid"  border-width="thin" border-color="lightblue"  class="w3-third">
   <div border-style="solid"  border-width="thin" border-color="lightblue"  class="w3-card w3-container" style="min-height:460px">
   <h3>Design</h3><br>
@@ -132,13 +147,11 @@
   </div>
 </div>
 </div>
-
 <div border-style="solid"  border-width="thin" border-color="lightblue"  class="w3-container">
 <hr>
 <div border-style="solid"  border-width="thin" border-color="lightblue"  class="w3-center">
   <h2>Color Classes</h2>
 </div>
-
 <div border-style="solid"  border-width="thin" border-color="lightblue"  class="w3-row">
   <div border-style="solid"  border-width="thin" border-color="lightblue"  class="w3-col w3-container m2 w3-red"><p>Red</p></div>
   <div border-style="solid"  border-width="thin" border-color="lightblue"  class="w3-col w3-container m2 w3-blue"><p>Blue</p></div>
@@ -147,7 +160,6 @@
   <div border-style="solid"  border-width="thin" border-color="lightblue"  class="w3-col w3-container m2 w3-yellow"><p>Yellow</p></div>
   <div border-style="solid"  border-width="thin" border-color="lightblue"  class="w3-col w3-container m2 w3-orange"><p>Orange</p></div>
 </div>
-
 <hr>
 <div border-style="solid"  border-width="thin" border-color="lightblue"  class="w3-center">
   <h2>Built-In Responsiveness</h2>
@@ -160,11 +172,9 @@
     <!-- 2단 분리 왼쪽박스 시작 -->
     <div border-style="solid" border-width="thin" border-color="lightblue" class="w3-half w3-container w3-blue w3-border">
       <!--jquery Date picker input field -->
-
-
       <li> Time: <input id="time_field" placeholder="When you will come?" type="text" /></li>
       <li> Name: <input id="name_field" placeholder="Enter name." type="text" /> </li>
-      <li> Phone: <input id="phone_field" placeholder="Enter contact number" type="text" />
+      <li> Phone: <input id="phone_field" placeholder="Enter contact number" type="text" > </li>
       <li> Seats? : <input id="how_many_field" placeholder="Enter guest number." type="text" /></li>
       <li> Any request?: <input id="anything_field" placeholder="anyrequest?" type="text" /></li>
       <li> Table No. <input id="table_number" placeholder="Table Number?" type="text" /></li>
@@ -172,7 +182,6 @@
         <button id="submit_btn" onclick="storeData()" align="center">Please click here</button>
       </li>
     </div>
-
     <li id="date_input"> Date: <input type="text" id="date"></li>
     <!-- 2단 분리 오른쪽박스시작 -->
     <div border-style="solid" border-width="thin" border-color="lightblue" class="w3-half w3-container">
@@ -180,8 +189,6 @@
       월:<p id="month"></p>
       일:<p id="day"></p>
       요일:<p id="mydate"></p>
-
-
       <script type="text/javascript">
         $(function() {
           $("#date").datepicker({
@@ -218,19 +225,14 @@
 
     </div>
   </div>
-
-
   <!-- <p>textbox를 클릭하면 <String>캘린더</String> 표시</p> -->
-
   <br /><br />
-  </div>
   <script>
     function storeData() {
-
       var month = document.getElementById("month").innerHTML;
       var table_number = document.getElementById("table_number").value;
       var year = document.getElementById("year").innerHTML;
-      var day = document.getElementById("day").innerHTML; //datepicker에서 받은 값을 넣을때는 innerHTML을 사용해야 합니다. 
+      var day = document.getElementById("day").innerHTML; //datepicker에서 받은 값을 넣을때는 innerHTML을 사용해야 합니다.
 
 
       db.collection(year).doc(month).collection(day).doc(table_number).set({
@@ -250,48 +252,44 @@
         });
     }
   </script>
-
-
-
   <!-- 2단 분리 박스 종료 -->
   <br>
-  <!-- 3단 박스, 4단 박스외 기타 
+<!-- 3단 박스, 4단 박스외 기타
 <div border-style="solid"  border-width="thin" border-color="lightblue"  class="w3-row w3-border">
   <div border-style="solid"  border-width="thin" border-color="lightblue"  class="w3-third w3-container w3-green">
-    <h5>w3-third</h5>  
+    <h5>w3-third</h5>
     <p>The w3-third class uses one third (33.33%) of the screen widow.</p>
     <p>On small screens (max 600 pixels) it automatically resizes to full screen width.</p>
   </div>
   <div border-style="solid"  border-width="thin" border-color="lightblue"  class="w3-third w3-container">
-    <h5>w3-third</h5>  
+    <h5>w3-third</h5>
   </div>
   <div border-style="solid"  border-width="thin" border-color="lightblue"  class="w3-third w3-container">
-    <h5>w3-third</h5>  
+    <h5>w3-third</h5>
   </div>
 </div>
 <br>
-
 <div border-style="solid"  border-width="thin" border-color="lightblue"  class="w3-row w3-border">
   <div border-style="solid"  border-width="thin" border-color="lightblue"  class="w3-quarter w3-container w3-red">
-    <h5>w3-quarter</h5>  
+    <h5>w3-quarter</h5>
     <p>The w3-quarter class uses one quarter (25%) of the screen window.</p>
     <p>On small screens (max 600 pixels) it automatically resizes to full screen width.</p>
   </div>
   <div border-style="solid"  border-width="thin" border-color="lightblue"  class="w3-quarter w3-container">
-    <h5>w3-quarter</h5>  
+    <h5>w3-quarter</h5>
   </div>
   <div border-style="solid"  border-width="thin" border-color="lightblue"  class="w3-quarter w3-container">
-    <h5>w3-quarter</h5>  
+    <h5>w3-quarter</h5>
   </div>
   <div border-style="solid"  border-width="thin" border-color="lightblue"  class="w3-quarter w3-container">
-    <h5>w3-quarter</h5>  
+    <h5>w3-quarter</h5>
   </div>
-</div> 
-     
+</div>
+
 <div border-style="solid"  border-width="thin" border-color="lightblue"  class="w3-center">
   <h2>Containers</h2>
   <p>Use containers to create headers, sections and footers.</p>
-</div>   
+</div>
 
 <header class="w3-container w3-blue-grey">
   <h2>Header</h2>
@@ -379,7 +377,7 @@
   <h3>Paper-like Cards with Shadows</h3>
 </div>
 
-<div border-style="solid"  border-width="thin" border-color="lightblue"  class="w3-row-padding"> 
+<div border-style="solid"  border-width="thin" border-color="lightblue"  class="w3-row-padding">
 
 <div border-style="solid"  border-width="thin" border-color="lightblue"  class="w3-third">
 <div border-style="solid"  border-width="thin" border-color="lightblue"  class="w3-card">
@@ -453,15 +451,15 @@
 <div border-style="solid"  border-width="thin" border-color="lightblue"  class="w3-half">
 <form class="w3-container w3-card-4">
   <h2>Input Form</h2>
-  <div border-style="solid"  border-width="thin" border-color="lightblue"  class="w3-section">      
+  <div border-style="solid"  border-width="thin" border-color="lightblue"  class="w3-section">
     <input class="w3-input" type="text" required>
     <label>Name</label>
   </div>
-  <div border-style="solid"  border-width="thin" border-color="lightblue"  class="w3-section">      
+  <div border-style="solid"  border-width="thin" border-color="lightblue"  class="w3-section">
     <input class="w3-input" type="text" required>
     <label>Email</label>
   </div>
-  <div border-style="solid"  border-width="thin" border-color="lightblue"  class="w3-section">      
+  <div border-style="solid"  border-width="thin" border-color="lightblue"  class="w3-section">
     <input class="w3-input" type="text" required>
     <label>Subject</label>
   </div>
@@ -519,7 +517,7 @@
 <div border-style="solid"  border-width="thin" border-color="lightblue"  class="w3-light-gray">
   <div border-style="solid"  border-width="thin" border-color="lightblue"  id="myBar" class="w3-center w3-padding w3-theme" style="width:5%">5%</div>
 </div><br>
-<button class="w3-btn w3-theme" onclick="move()">Click Me</button> 
+<button class="w3-btn w3-theme" onclick="move()">Click Me</button>
 </div>
 
 <hr>
@@ -558,8 +556,7 @@
   </div>
 </div>
 -->
-
-  <!-- Accordions  
+  <!-- Accordions
 <hr>
 <h2 class="w3-center">Accordions</h2>
 <button onclick="myAccFunc('Demo1')" class="w3-padding-16 w3-theme w3-button w3-block w3-left-align">Open Section 1</button>
@@ -601,7 +598,7 @@
 
 <div border-style="solid"  border-width="thin" border-color="lightblue"  id="Paris" class="w3-container city w3-animate-opacity">
   <h2>Paris</h2>
-  <p>Paris is the capital of France.</p> 
+  <p>Paris is the capital of France.</p>
   <p>The Paris area is one of the largest population centers in Europe, with more than 12 million inhabitants.</p>
 </div>
 
@@ -623,7 +620,7 @@
   <a class="w3-button w3-theme-d3 w3-disabled">Button</a>
   <br><br>
   <a class="w3-button w3-circle w3-large w3-black"><i class="fa fa-plus"></i></a>
-  <a class="w3-button w3-circle w3-large w3-theme"><i class="fa fa-plus"></i></a>  
+  <a class="w3-button w3-circle w3-large w3-theme"><i class="fa fa-plus"></i></a>
   <a class="w3-button w3-circle w3-large w3-card-4"><i class="fa fa-plus"></i></a>
 </div>
 <br>
@@ -656,18 +653,18 @@
       <a href="#" class="w3-bar-item w3-button w3-hover-theme">5</a>
       <a href="#" class="w3-bar-item w3-button w3-hover-theme">»</a>
     </div>
-  </div> 
+  </div>
 </div>
 -->
   <br>
 
-  <!-- Footer 
+  <!-- Footer
 
 <footer class="w3-container w3-theme-dark w3-padding-16">
   <h3>Footer</h3>
   <p>Powered by <a href="https://www.w3schools.com/w3css/default.asp" target="_blank">w3.css</a></p>
   <div border-style="solid"  border-width="thin" border-color="lightblue"  style="position:relative;bottom:55px;" class="w3-tooltip w3-right">
-    <span class="w3-text w3-theme-light w3-padding">Go To Top</span>    
+    <span class="w3-text w3-theme-light w3-padding">Go To Top</span> 
     <a class="w3-text-white" href="#myHeader"><span class="w3-xlarge">
     <i class="fa fa-chevron-circle-up"></i></span></a>
   </div>
@@ -684,17 +681,10 @@
   <script src="scripts/datepicker.js"></script>
 
   <!-- /*
-파이어베이스 연결 스크립트 
+파이어베이스 연결 스크립트
 */ -->
   <!-- Firebase App (the core Firebase SDK) is always required and must be listed first -->
-  <script src="https://www.gstatic.com/firebasejs/7.14.2/firebase-app.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/7.14.2/firebase-auth.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/7.14.2/firebase-firestore.js"></script>
-  <!-- TODO: Add SDKs for Firebase products that you want to use
-     https://firebase.google.com/docs/web/setup#available-libraries -->
-  <script src="https://www.gstatic.com/firebasejs/7.14.2/firebase-analytics.js"></script>
 
-  <script src="scripts/firestore_config.js"></script>
   <!-- <script src = "scripts/firestore_storedata.js"></script> -->
   <!-- <script src = "scripts/firestore_config.js"></script> -->
 

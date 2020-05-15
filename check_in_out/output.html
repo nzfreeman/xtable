@@ -1,0 +1,92 @@
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <link href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css" rel="Stylesheet" type="text/css" />
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+  <link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-black.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="http://code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" type="text/css" />
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+  <script src="http://code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>
+</head>
+<body>
+<table style="width:100%" id="ex-table">
+  <tr id="tr">
+    <th>Employee ID</th>
+    <th>Email</th>
+    <th>Date </th>
+    <th>Check in Time</th>
+    <th>Check out Time</th>
+</table>
+<script>
+  var firebaseConfig = {
+    apiKey: "AIzaSyAeRSo9jM53_-3FN779azh2cgP50kNF4dA",
+    authDomain: "freeman-ondal.firebaseapp.com",
+    databaseURL: "https://freeman-ondal.firebaseio.com",
+    projectId: "freeman-ondal",
+    storageBucket: "freeman-ondal.appspot.com",
+    messagingSenderId: "316720926059",
+    appId: "1:316720926059:web:e90aa4e1596021b920d02e",
+    measurementId: "G-4QJ9N6JLLQ"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+  var database = firebase.database();
+  database.ref("/").once('value', function(snapshot) {
+    if (snapshot.exists()) {
+      var content = '';
+      snapshot.forEach(function(data) {
+        var val = data.val();
+        var tableData = [];
+        var sysDate, checkinTime, checkoutTime, email, employeeId;
+
+        for (var checkin in val.Checkin) {
+          for (var date in val.Checkin[checkin]) {
+            tableData.push({
+              'employeeId': checkin,
+              'email': val.Checkin[checkin][date]['Email'],
+              'date': date,
+              'checkinTime': val.Checkin[checkin][date]['Check in Time']
+            });
+          }
+        }
+
+        for (var checkout in val.Checkout) {
+          for (var checkoutDate in val.Checkout[checkout]) {
+            var item = tableData.find(function(i) {
+              return i.employeeId == checkout && i.date == checkoutDate;
+            })
+            if (item)
+              item.checkoutTime = val.Checkout[checkout][checkoutDate]['Checkout Time'];
+          }
+        }
+        console.log(tableData);
+        tableData.forEach(function(item) {
+          content += '<tr>';
+          content += '<td>' + item.employeeId + '</td>';
+          content += '<td>' + item.email + '</td>';
+          content += '<td>' + item.date + '</td>';
+          content += '<td>' + item.checkinTime + '</td>';
+          content += '<td>' + (item.checkoutTime ? item.checkoutTime : 'NA') + '</td>';
+          content += '</tr>';
+        });
+      });
+      $('#ex-table').append(content);
+    }
+  });
+</script>
+
+
+<script src="https://www.gstatic.com/firebasejs/7.14.2/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.14.2/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.14.2/firebase-firestore.js"></script>
+<!-- TODO: Add SDKs for Firebase products that you want to use
+   https://firebase.google.com/docs/web/setup#available-libraries -->
+<script src="https://www.gstatic.com/firebasejs/7.14.2/firebase-analytics.js"></script>
+<script src="scripts/firestore_config.js"></script>
+
+
+</body>

@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <link href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css" rel="Stylesheet" type="text/css" />
+  <title>Document</title>
+</head>
+
+<body>
+  <!-- Calendar date and time   begin here -->
+  <div aling="center">
+    <table align="center">
+      <tbody>
+        <tr align="center">
+          <th align="center" id="currnt date and time"></th>
+          <th align="center" id="current_time"></th>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <script>
+    var today = new Date();
+    var month = new Array();
+    month[0] = "Jan";
+    month[1] = "Feb";
+    month[2] = "Mar";
+    month[3] = "Apr";
+    month[4] = "May";
+    month[5] = "Jun";
+    month[6] = "Jul";
+    month[7] = "Aug";
+    month[8] = "Sep";
+    month[9] = "Oct";
+    month[10] = "Nov";
+    month[11] = "Dec";
+    var enMonth = month[today.getMonth()];
+    var date = today.getDate() + '-' + enMonth + '-' + today.getFullYear();
+    // var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+    // var dateTime = date+' '+time;
+    var dateTime = date;
+    // <!--javascript output 출력-->
+    document.getElementById("currnt date and time").innerHTML = dateTime;
+  </script>
+  <div border-style="solid" border-width="thin" border-color="lightblue" class="w3-half w3-container">
+    연도:<p id="year"></p>
+    월:<p id="month"></p>
+    일:<p id="day"></p>
+    요일:<p id="mydate"></p>
+
+
+    <script type="text/javascript">
+      $(function() {
+        $("#date").datepicker({
+          dateFormat: "dd-mm-yy",
+          dayNamesMin: ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"],
+          monthNames: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+          onSelect: function(d) {
+
+
+            var arr = d.split("/");
+            var year = arr[0];
+            var month = arr[1];
+            var day = arr[2];
+
+
+            //요일 가져오기
+            //데이터를 먼저 가져오고 (숫자로 넘어옴)
+            var date = new Date($("#date").datepicker({
+              dateFormat: "yy/mm/dd"
+            }).val());
+            //일요일 0~
+            alert("date:" + date.getDay());
+
+            week = new Array("Su", "Mo", "Tu", "We", "Th", "Fr", "Sa");
+            $("#mydate").text(week[date.getDay()]);
+            $("#year").text(year);
+            $("#month").text(month);
+            $("#day").text(day);
+          }
+        });
+
+      });
+    </script>
+
+  </div>
+  <!-- Current time -->
+  <h1>X table booking</h1>
+  <script src="script/current_time.js"></script>
+  <div class="input_box" align="center">
+    <div class="input_box">
+      <table>
+        <tbody>
+          <p>선택일 : <input type="text" id="date"></p>
+
+          <p> Guest Name:</p> <input class="input_box" size="20" align="center" type="text" id="guestname">
+
+        </tbody>
+
+
+      </table>
+    </div>
+    <div>
+      <input class="input_box" type="text" id="guestrequest">Request
+    </div>
+    <div>
+      <input class="input_box" type="text" id="guestphone">Phone
+    </div>
+    <div>
+      <input class="input_box" type="text" id="guestdate">Date
+    </div>
+    <div>
+      PartySize <input class="input_box" type="text" id="guestsize">
+    </div>
+    <div>
+      <input class="input_box" type="text" id="guesttime1">Request
+    </div>
+    <div class="input_button" align="center">
+      <button type="button" name="button" onclick="saveFirestoreFunction" id="saveFirestore">파이어 스토어로 저장하기</button>
+    </div>
+  </div>
+  <div>
+    <div class="input_button" align="center">
+      <button type="button" name="button" onclick="getFirestoreFunction" id="getFirestore">파이어스토어에서 가져오기</button>
+    </div>saveFirestoreFunction
+  </div>
+  <div class="output_box">
+    <p align="center">파이어스토에서 가져온 내용 보여주기</p>
+  </div>
+
+<script type="text/javascript">
+  function saveFirestoreFunction (){
+    db.collection("collection").doc("doc").set({
+      name:"guestname",
+      time:"guesttime1",
+      size:"guestsize",
+      phone:"guestphone"
+    });
+  };
+</script>
+
+  <!-- The core Firebase JS SDK is always required and must be listed first -->
+  <script src="https://www.gstatic.com/firebasejs/7.14.4/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.14.4/firebase-firestore.js"></script>
+  <!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+  <script src="https://www.gstatic.com/firebasejs/7.14.4/firebase-analytics.js"></script>
+  <script>
+    // Your web app's Firebase configuration
+    var firebaseConfig = {
+      apiKey: "AIzaSyAh247r4SkCp3EPAWOAytTgmgOahGBMVUo",
+      authDomain: "xtableproject.firebaseapp.com",
+      databaseURL: "https://xtableproject.firebaseio.com",
+      projectId: "xtableproject",
+      storageBucket: "xtableproject.appspot.com",
+      messagingSenderId: "489595774277",
+      appId: "1:489595774277:web:6bf0bce1106ee9512aca2c",
+      measurementId: "G-C16JPW8BY2"
+    };
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+    firebase.analytics();
+    const db = firebase.firestore();
+  </script>
+  <script type="text/javascript" src="app.js">
+  </script>
+</body>
+
+</html>

@@ -1,22 +1,158 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-  <head>
-    <meta charset="utf-8">
-    <title>xtableproject</title>
-  </head>
-  <body>
-dddd
+<head>
+<meta charset="utf-8">
+<title>Xtable Template</title>
+<!-- Header -->
+<!-- <header class="w3-container w3-theme w3-padding" id="myHeader"> -->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- <script src="https://code.jquery.com/jquery-1.12.4.js"></script> -->
+<!-- <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script> -->
+<link href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css" rel="Stylesheet" type="text/css" />
+<!-- <link rel="stylesheet" href="http://code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" type="text/css" /> -->
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+<script src="http://code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>
+<script src="scripts/current_time.js"></script>
+<!-- css파일이 오류인 경우에 xtable/css로 경로를 변경하면 됩니다. -->
+</head>
+<!-- 바디섹션의 시작부분 -->
+<body onload="startTime()">
+  <div aling="center" class="w3-center">
+    <!-- Header Notice postion -->
+    <h4 >Xtable Booking Notice</h4>
+    <!-- Calendar date and time   begin here -->
+    <div aling="center">
+      <table align="center">
+        <tbody>
+          <tr align="center">
+            <th> <p align="center" id="current date and time"></p></th>
+            <th> <p align="center" id="current_time"></p></th>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <script>
+      var today = new Date();
+      var month = new Array();
+      month[0] = "Jan";
+      month[1] = "Feb";
+      month[2] = "Mar";
+      month[3] = "Apr";
+      month[4] = "May";
+      month[5] = "Jun";
+      month[6] = "Jul";
+      month[7] = "Aug";
+      month[8] = "Sep";
+      month[9] = "Oct";
+      month[10] = "Nov";
+      month[11] = "Dec";
+      var enMonth = month[today.getMonth()];
+      var date = today.getDate() + '-' + enMonth + '-' + today.getFullYear();
+      // var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+      // var dateTime = date+' '+time;
+      var dateTime = date;
+      // <!--javascript output 출력-->
+      document.getElementById("current date and time").innerHTML = dateTime;
+    </script>
+    <!-- Calendar date and time  ends here -->
+    <!-- Current time -->
+    <h1 class="w3-xxxlarge w3-animate-bottom">X table booking</h1>
+    <script src="scripts/current_time.js"></script>
 
+  </div>
 
+  <br>
+  <!-- 2단 분리 시작 -->
+  <div border-style="solid" border-width="thin" border-color="lightblue" class="w3-row w3-border">
+    <!-- 2단 분리 왼쪽박스 시작 -->
+    <div border-style="solid" border-width="thin" border-color="lightblue" class="w3-half w3-container w3-blue w3-border">
+      <!--jquery Date picker input field -->
+      <p>선택일 : <input type="text" size="13" id="date"></p>
+      <p hidden id="year"></p>
+      <p hidden id="month"></p>
+      <p hidden id="day"></p>
+      <p hidden id="mydate"></p>
+      <li> Time: <input id="time_field" size="21" type="text"></li>
+      <li> Name: <input id="name_field" size="21" type="text"> </li>
+      <li> Phone: <input id="phone_field" size="21" type="text"></li>
+      <li> Party Size? : <input id="how_many_field" size="20" type="text"></li>
+      <li> Table No.: <input id="c_table" size="18" type="text"> </li>
+      <li> Any request?: <input id="anything_field" size="14" type="text" /></li>
+      <li class="input_button">
+        <button id="submit_btn" onclick="storeData()" align="center">Submit Booking</button>
+      </li>
+    </div>
+    <script type="text/javascript">
+      $(function() {
+        $("#date").datepicker({
+          dateFormat: "D-yy-M-dd",
+          dayNamesMin: ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"],
+          monthNames: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+          onSelect: function(d) {
+            var arr = d.split("-");
+            var year = arr[1];
+            var month = arr[2];
+            var day = arr[3];
+            var weekday = arr[0];
+            var date = new Date($("#date").datepicker({
+              dateFormat: "yy-M-dd"
+            }).val());  //일요일 0~   // alert("date:" + date.getDay()); //
+            week = new Array("Su", "Mo", "Tu", "We", "Th", "Fr", "Sa");
+            // $("#mydate").text(week[date.getDay()]);
+            $("#mydate").text(weekday);
+            $("#year").text(year);
+            $("#month").text(month);
+            $("#day").text(day);
+          }
+        });
+      });
+    </script>
+    <!-- 2단 분리 왼쪽 박스 종료 -->
+    <!-- 2단 분리 오른쪽박스시작 -->
+    <div class="w3-half w3-container">
 
-    <!-- The core Firebase JS SDK is always required and must be listed first -->
-<script src="/__/firebase/7.14.4/firebase-app.js"></script>
+      <li class="output_button">
+        <button id="submit_btn3" onclick="renderBooking()" align="center">getting data from firestore</button>
+      </li>
 
-<!-- TODO: Add SDKs for Firebase products that you want to use
+      <ul id="output"> </ul>
+
+      <input type = "text" id = "booking_list" >
+    </div>
+
+  </div>
+  <br />2단 박스<br />
+  <div>
+  </div>
+  <!-- 2단 분리 박스 종료 -->
+
+  <script src="scripts/datepicker.js"></script>
+  <!-- The core Firebase JS SDK is always required and must be listed first -->
+  <script src="https://www.gstatic.com/firebasejs/7.14.4/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.14.4/firebase-firestore.js"></script>
+  <!-- TODO: Add SDKs for Firebase products that you want to use
      https://firebase.google.com/docs/web/setup#available-libraries -->
-<script src="/__/firebase/7.14.4/firebase-analytics.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.14.4/firebase-analytics.js"></script>
+  <script>
+    // Your web app's Firebase configuration
+    var firebaseConfig = {
+      apiKey: "AIzaSyAh247r4SkCp3EPAWOAytTgmgOahGBMVUo",
+      authDomain: "xtableproject.firebaseapp.com",
+      databaseURL: "https://xtableproject.firebaseio.com",
+      projectId: "xtableproject",
+      storageBucket: "xtableproject.appspot.com",
+      messagingSenderId: "489595774277",
+      appId: "1:489595774277:web:6bf0bce1106ee9512aca2c",
+      measurementId: "G-C16JPW8BY2"
+    };
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+    firebase.analytics();
+    const db = firebase.firestore();
+  </script>
+  <script src = "scripts/firestore_storedata.js"></script>
+  <script src="scripts/app.js"></script>
 
-<!-- Initialize Firebase -->
-<script src="/__/firebase/init.js"></script>
-  </body>
+</body>
+
 </html>

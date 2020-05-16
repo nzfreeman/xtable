@@ -1,0 +1,41 @@
+<html>
+    <head>
+        <link rel="stylesheet" href="styles.css">
+    </head>
+    <body>
+
+        <h1>Cloud Cafe</h1>
+
+        <div class="content">
+
+            <form id="add-cafe-form"></form>
+
+            <ul id="cafe-list"></ul>
+
+        </div>
+        <!-- The core Firebase JS SDK is always required and must be listed first -->
+        <script src="https://www.gstatic.com/firebasejs/7.14.4/firebase-app.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/7.14.4/firebase-firestore.js"></script>
+        <!-- TODO: Add SDKs for Firebase products that you want to use
+           https://firebase.google.com/docs/web/setup#available-libraries -->
+        <script src="https://www.gstatic.com/firebasejs/7.14.4/firebase-analytics.js"></script>
+        <script>
+          // Your web app's Firebase configuration
+          var firebaseConfig = {
+            apiKey: "AIzaSyAh247r4SkCp3EPAWOAytTgmgOahGBMVUo",
+            authDomain: "xtableproject.firebaseapp.com",
+            databaseURL: "https://xtableproject.firebaseio.com",
+            projectId: "xtableproject",
+            storageBucket: "xtableproject.appspot.com",
+            messagingSenderId: "489595774277",
+            appId: "1:489595774277:web:6bf0bce1106ee9512aca2c",
+            measurementId: "G-C16JPW8BY2"
+          };
+          // Initialize Firebase
+          firebase.initializeApp(firebaseConfig);
+          firebase.analytics();
+          const db = firebase.firestore();
+        </script>
+        <script src="app_cafe.js"></script>
+    </body>
+</html>

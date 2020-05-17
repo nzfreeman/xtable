@@ -9,13 +9,18 @@ function storeData() {
     var how_many_field = document.getElementById("how_many_field").value;
     var anything_field = document.getElementById("anything_field").value;
     var weekday = document.getElementById("mydate").innerHTML
-db.collection(year_en).doc(month_en).collection(day_en).doc(c_table).set({
+db.collection("booking").doc().set({
+  Year: year_en,
         Time: time_field,
         Name: name_field,
         Phone: phone_field,
         Seats: how_many_field,
         Any_request: anything_field,
-        Weekk: weekday
+        Week: weekday,
+        Month: month_en,
+        Day: day_en,
+        Table: c_table
+
       })
       .then(function() {
         console.log("Doc successful");

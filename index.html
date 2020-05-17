@@ -9,6 +9,8 @@
 <!-- <script src="https://code.jquery.com/jquery-1.12.4.js"></script> -->
 <!-- <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script> -->
 <link href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css" rel="Stylesheet" type="text/css" />
+<link href="styles.css" rel="Stylesheet" type="text/css" />
+
 <!-- <link rel="stylesheet" href="http://code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" type="text/css" /> -->
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
 <script src="http://code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>
@@ -68,10 +70,10 @@
     <div border-style="solid" border-width="thin" border-color="lightblue" class="w3-half w3-container w3-blue w3-border">
       <!--jquery Date picker input field -->
       <p>선택일 : <input type="text" size="13" id="date"></p>
-      <p hidden id="year"></p>
-      <p hidden id="month"></p>
-      <p hidden id="day"></p>
-      <p hidden id="mydate"></p>
+      <p hidden type ="text" id="year"></p>
+      <p hidden type ="text" id="month"></p>
+      <p hidden type ="text" id="day"></p>
+      <p hidden type ="text" id="mydate"></p>
       <li> Time: <input id="time_field" size="21" type="text"></li>
       <li> Name: <input id="name_field" size="21" type="text"> </li>
       <li> Phone: <input id="phone_field" size="21" type="text"></li>
@@ -112,12 +114,20 @@
     <div class="w3-half w3-container">
 
       <li class="output_button">
-        <button id="submit_btn3" onclick="renderBooking()" align="center">getting data from firestore</button>
+        <button id="submit_btn3" onclick="renderBooking()" align="center">renderBooking</button>
+        <button id="getfirestore" onclick="getdatafromFirestore()" align="center">getting data from firestore</button>
+
       </li>
+      <br>
+      <div class = "content">
+      <form id="add-booking"></form>
+      <input type="text" name="city" placeholder="Cafe city">
+      <input type="text" name="name2" placeholder="name2">
+<button> add cafe</button>
+      <ul id="output_list"> dddd</ul>
 
-      <ul id="output"> </ul>
+</div>
 
-      <input type = "text" id = "booking_list" >
     </div>
 
   </div>
@@ -150,8 +160,13 @@
     firebase.analytics();
     const db = firebase.firestore();
   </script>
-  <script src = "scripts/firestore_storedata.js"></script>
+  <!-- <script src = "scripts/firestore_storedata.js"></script> -->
   <script src="scripts/app.js"></script>
+  <script src="scripts/firestore_storedata.js"></script>
+
+  <script>
+
+    </script>
 
 </body>
 

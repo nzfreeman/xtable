@@ -4,17 +4,17 @@ const form = document.querySelector('#add-cafe-form');
 // create element & render cafe
 function renderCafe(doc){
     let li = document.createElement('li');
-    let name = document.createElement('span');
-    let city = document.createElement('span');
+    let name = document.createElement('p');
+    let day = document.createElement('h1');
     let cross = document.createElement('div');
 
     li.setAttribute('data-id', doc.id);
     name.textContent = doc.data().name;
-    city.textContent = doc.data().city;
+    day.textContent = doc.data().day;
     cross.textContent = 'del';
 
     li.appendChild(name);
-    li.appendChild(city);
+    li.appendChild(day);
     li.appendChild(cross);
 
     cafeList.appendChild(li);
@@ -23,7 +23,7 @@ function renderCafe(doc){
     cross.addEventListener('click', (e) => {
         e.stopPropagation();
         let id = e.target.parentElement.getAttribute('data-id');
-        db.collection('cafes').doc(id).delete();
+        db.collection('2020').doc(id).delete();
     });
 }
 
@@ -37,16 +37,16 @@ function renderCafe(doc){
 // saving data
 form.addEventListener('submit', (e) => {
     e.preventDefault();
-    db.collection('cafes').add({
+    db.collection('2020').add({
         name: form.name.value,
-        city: form.city.value
+        day: form.day.value
     });
     form.name.value = '';
-    form.city.value = '';
+    form.day.value = '';
 });
 
 // real-time listener
-db.collection('cafes').orderBy('city').onSnapshot(snapshot => {
+db.collection('2020').orderBy('day').onSnapshot(snapshot => {
     let changes = snapshot.docChanges();
     changes.forEach(change => {
         console.log(change.doc.data());

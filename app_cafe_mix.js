@@ -41,11 +41,11 @@ function renderBooking(doc){
 }
 
 // getting data
-db.collection('2020').doc().get().then(snapshot => {
-    snapshot.docs.forEach(doc => {
-        renderBooking(doc);
-    });
-});
+// db.collection('2020').doc().get().then(snapshot => {
+//     snapshot.docs.forEach(doc => {
+//         renderBooking(doc);
+//     });
+// });
 
 // saving data
 form.addEventListener('submit', (e) => {
@@ -54,6 +54,10 @@ form.addEventListener('submit', (e) => {
         date: form.date.value,
         name: form.name.value,
         phone: form.phone.value,
+        year: form.year.value,
+        month: form.month.value,
+        day: form.day.value,
+        mydate: form.mydate.value,
         partysize: form.partysize.value,
         request: form.request.value,
         tablenumber: form.tablenumber.value
@@ -71,7 +75,7 @@ form.addEventListener('submit', (e) => {
 db.collection('2020').orderBy('date').onSnapshot(snapshot => {
     let changes = snapshot.docChanges();
     changes.forEach(change => {
-        console.log(change.doc.data());
+        // console.log(change.doc.data());
         if(change.type == 'added'){
             renderBooking(change.doc);
         } else if (change.type == 'removed'){

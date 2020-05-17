@@ -2,25 +2,95 @@
 
 <head>
   <title>Booking</title>
+  <link href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css" rel="Stylesheet" type="text/css" />
   <link rel="stylesheet" href="styles.css">
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+  <script src="http://code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>
+  <script src="scripts/current_time.js"></script>
 </head>
-
-<body>
+<body onload="startTime()">
+  <div aling="center" class="w3-center">
+    <!-- Header Notice postion -->
+    <h4 >Xtable Booking Notice</h4>
+    <!-- Calendar date and time   begin here -->
+    <div aling="center">
+      <table align="center">
+        <tbody>
+          <tr align="center">
+            <th> <p align="center" id="current date and time"></p></th>
+            <th> <p align="center" id="current_time"></p></th>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <script>
+      var today = new Date();
+      var month = new Array();
+      month[0] = "Jan";
+      month[1] = "Feb";
+      month[2] = "Mar";
+      month[3] = "Apr";
+      month[4] = "May";
+      month[5] = "Jun";
+      month[6] = "Jul";
+      month[7] = "Aug";
+      month[8] = "Sep";
+      month[9] = "Oct";
+      month[10] = "Nov";
+      month[11] = "Dec";
+      var enMonth = month[today.getMonth()];
+      var date = today.getDate() + '-' + enMonth + '-' + today.getFullYear();
+      // var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+      // var dateTime = date+' '+time;
+      var dateTime = date;
+      // <!--javascript output 출력-->
+      document.getElementById("current date and time").innerHTML = dateTime;
+    </script>
 
   <h1>Cloud Booking</h1>
 
   <div class="content">
 
     <form id="add-booking-form">
-      <input type="text" name="date" placeholder="date">
+      <input type="text" size="12" name="date" placeholder="date" id="date">
+      <input hidden type ="text" name="year" id="year"></input>
+      <input hidden type ="text" name="month" id="month"></input>
+      <input hidden type ="text" name="day" id="day"></input>
+      <input hidden type ="text" name="mydate" id="mydate"></input>
       <input type="text" name="name" placeholder="name">
       <input type="text" name="phone" placeholder="phone">
       <input type="text" name="partysize" placeholder="partysize">
       <input type="text" name="request" placeholder="request">
       <input type="text" name="tablenumber" placeholder="tablenumber">
       <button> add booking</button>
-
     </form>
+<script>
+      $(function() {
+        $("#date").datepicker({
+          dateFormat: "dd-M-yy,D",
+          dayNamesMin: ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"],
+          monthNames: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+          onSelect: function(d) {
+            var arr = d.split("-");
+            var year = arr[1];
+            var month = arr[2];
+            var day = arr[3];
+            var weekday = arr[0];
+            var date = new Date($("#date").datepicker({
+              dateFormat: "dd-M-yy,D"
+            }).val());  //일요일 0~   // alert("date:" + date.getDay()); //
+            week = new Array("Su", "Mo", "Tu", "We", "Th", "Fr", "Sa");
+            // $("#mydate").text(week[date.getDay()]);
+            $("#mydate").text(weekday);
+            $("#year").text(year);
+            $("#month").text(month);
+            $("#day").text(day);
+          }
+        });
+      });
+</script>
+
+    ---------------------------------------------------------
     <ul id="booking-list"></ul>
 
   </div>

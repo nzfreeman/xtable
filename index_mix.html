@@ -1,7 +1,8 @@
-<html>
-
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
 <head>
   <title>Booking</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <link href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css" rel="Stylesheet" type="text/css" />
   <link rel="stylesheet" href="styles.css">
   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
@@ -53,31 +54,31 @@
 
     <form id="add-booking-form">
       <input type="text" size="12" name="date" placeholder="date" id="date">
-      <input hidden type ="text" name="year" id="year"></input>
-      <input hidden type ="text" name="month" id="month"></input>
-      <input hidden type ="text" name="day" id="day"></input>
-      <input hidden type ="text" name="mydate" id="mydate"></input>
+      <input hidden type ="text" name="year" id="year">
+      <input hidden type ="text" name="month" id="month">
+      <input hidden type ="text" name="day" id="day">
+      <input hidden type ="text" name="mydate" id="mydate">
       <input type="text" name="name" placeholder="name">
-      <input type="text" name="phone" placeholder="phone">
+      <input type="text" name="phone" placeholder="phone"><br>
       <input type="text" name="partysize" placeholder="partysize">
       <input type="text" name="request" placeholder="request">
-      <input type="text" name="tablenumber" placeholder="tablenumber">
-      <button> add booking</button>
+      <input type="text" name="tablenumber" placeholder="tablenumber"><br>
+      <button align="left"> add booking</button>
     </form>
 <script>
       $(function() {
         $("#date").datepicker({
-          dateFormat: "dd-M-yy,D",
+          dateFormat: "dd-M-yy-D",
           dayNamesMin: ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"],
           monthNames: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
           onSelect: function(d) {
             var arr = d.split("-");
-            var year = arr[1];
-            var month = arr[2];
-            var day = arr[3];
-            var weekday = arr[0];
+            var year = arr[2];
+            var month = arr[1];
+            var day = arr[0];
+            var weekday = arr[3];
             var date = new Date($("#date").datepicker({
-              dateFormat: "dd-M-yy,D"
+              dateFormat: "dd-M-yy"
             }).val());  //일요일 0~   // alert("date:" + date.getDay()); //
             week = new Array("Su", "Mo", "Tu", "We", "Th", "Fr", "Sa");
             // $("#mydate").text(week[date.getDay()]);
@@ -89,6 +90,22 @@
         });
       });
 </script>
+------------------<br>
+<table id="tbl_booking_list" border="2" cellpadding="10" style="border-collapse:collapse;">
+           <thead>
+               <th>Date</th>
+               <th>NAME</th>
+               <th>Phone</th>
+               <th>PartySize</th>
+               <th>Request</th>
+               <th>TableNumber</th>
+               <th>mydate</th>
+
+           </thead>
+
+       </table>
+
+
 
     ---------------------------------------------------------
     <ul id="booking-list"></ul>
@@ -118,6 +135,7 @@
     const db = firebase.firestore();
   </script>
   <script src="app_cafe_mix.js"></script>
+</div>
 </body>
 
 </html>

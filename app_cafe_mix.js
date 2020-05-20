@@ -56,11 +56,11 @@ function renderBooking(doc){
 }
 
 // getting data
-// db.collection('2020').doc().get().then(snapshot => {
-//     snapshot.docs.forEach(doc => {
-//         renderBooking(doc);
-//     });
-// });
+db.collection('2020').doc().get().then(snapshot => {
+    snapshot.docs.forEach(doc => {
+        renderBooking(doc);
+    });
+});
 
 // saving data
 form.addEventListener('submit', (e) => {

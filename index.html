@@ -69,42 +69,47 @@
     <!-- 2단 분리 왼쪽박스 시작 -->
     <div border-style="solid" border-width="thin" border-color="lightblue" class="w3-half w3-container w3-blue w3-border">
       <!--jquery Date picker input field -->
-      <p>선택일 : <input type="text" size="13" id="date"></p>
-      <p hidden type ="text" id="year"></p>
-      <p hidden type ="text" id="month"></p>
-      <p hidden type ="text" id="day"></p>
-      <p hidden type ="text" id="mydate"></p>
-      <li> Time: <input id="time_field" size="21" type="text"></li>
-      <li> Name: <input id="name_field" size="21" type="text"> </li>
-      <li> Phone: <input id="phone_field" size="21" type="text"></li>
-      <li> Party Size? : <input id="how_many_field" size="20" type="text"></li>
-      <li> Table No.: <input id="c_table" size="18" type="text"> </li>
-      <li> Any request?: <input id="anything_field" size="14" type="text" /></li>
-      <li class="input_button">
-        <button id="submit_btn" onclick="storeData()" align="center">Submit Booking</button>
-      </li>
+      <form id="add-booking-form">
+      선택일 : <input type="text" size="13" id="date">
+      <input hidden type ="text" placeholder="year" name= "year" id="year">
+      <input hidden type ="text" placeholder="month" name= "month" id="month">
+      <input hidden type ="text" placeholder="day" name= "day" id="day">
+      <input hidden type ="text" placeholder="weekday" name= "mydate" id="mydate">
+      Time: <input id="time_field" size="21" name="time"placeholder="time" type="text">
+      Name: <input id="name_field" size="21" name="name" placeholder="name" type="text">
+      Phone: <input id="phone_field" size="21" name="phone" placeholder="phone" type="text">
+      Party Size? : <input id="how_many_field" size="20" placeholder="partysize" name="partysize" type="text">
+      Table No.: <input id="c_table" size="18" name="tablenumber" placeholder="tablenumber" type="text">
+      Any request?: <input id="anything_field" size="14" placeholder="request" name="request" type="text">
+      <br><button align="center">Submit Booking</button>
+        <!-- 버튼 ID 삭제 -->
+        <!-- <button id="submit_btn" onclick="storeData()" align="center">Submit Booking</button> -->
+      </form>
     </div>
+
     <script type="text/javascript">
       $(function() {
         $("#date").datepicker({
-          dateFormat: "D-yy-M-dd",
+          dateFormat: "D-dd-M-yy",
           dayNamesMin: ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"],
           monthNames: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
           onSelect: function(d) {
             var arr = d.split("-");
-            var year = arr[1];
+            var year = arr[3];
             var month = arr[2];
-            var day = arr[3];
+            var day = arr[1];
             var weekday = arr[0];
             var date = new Date($("#date").datepicker({
-              dateFormat: "yy-M-dd"
+              dateFormat: "dd-M-yy"
             }).val());  //일요일 0~   // alert("date:" + date.getDay()); //
             week = new Array("Su", "Mo", "Tu", "We", "Th", "Fr", "Sa");
             // $("#mydate").text(week[date.getDay()]);
-            $("#mydate").text(weekday);
-            $("#year").text(year);
-            $("#month").text(month);
-            $("#day").text(day);
+            $("#mydate").val(weekday);
+            $("#year").val(year);
+            $("#month").val(month);
+            $("#day").val(day);
+            // alert("date:" + date.getDay());
+            alert(weekday);
           }
         });
       });
@@ -112,21 +117,29 @@
     <!-- 2단 분리 왼쪽 박스 종료 -->
     <!-- 2단 분리 오른쪽박스시작 -->
     <div class="w3-half w3-container">
+      <table id="tbl_booking_list" border="2" cellpadding="5" style="border-collapse:collapse;">
+                 <thead>
+                     <th>Date</th>
+                     <th>NAME</th>
+                     <th>Phone</th>
+                     <th>PartySize</th>
+                     <th>Request</th>
+                     <th>TableNumber</th>
+                     <th>mydate</th>
+                 </thead>
 
-      <li class="output_button">
-        <button id="submit_btn3" onclick="renderBooking()" align="center">renderBooking</button>
-        <button id="getfirestore" onclick="getdatafromFirestore()" align="center">getting data from firestore</button>
+             </table>
 
-      </li>
+
       <br>
-      <div class = "content">
+      <!-- <div class = "content">
       <form id="add-booking"></form>
       <input type="text" name="city" placeholder="Cafe city">
       <input type="text" name="name2" placeholder="name2">
 <button> add cafe</button>
       <ul id="output_list"> dddd</ul>
 
-</div>
+</div> -->
 
     </div>
 
@@ -162,7 +175,7 @@
   </script>
   <!-- <script src = "scripts/firestore_storedata.js"></script> -->
   <script src="scripts/app.js"></script>
-  <script src="scripts/firestore_storedata.js"></script>
+  <!-- <script src="scripts/firestore_storedata.js"></script> -->
 
   <script>
 

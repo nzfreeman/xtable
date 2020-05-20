@@ -61,16 +61,16 @@
           onSelect: function(d) {
 
 
-            var arr = d.split("/");
-            var year = arr[0];
+            var arr = d.split("-");
+            var year = arr[2];
             var month = arr[1];
-            var day = arr[2];
+            var day = arr[0];
 
 
             //요일 가져오기
             //데이터를 먼저 가져오고 (숫자로 넘어옴)
             var date = new Date($("#date").datepicker({
-              dateFormat: "yy/mm/dd"
+              dateFormat: "dd-mm-yy"
             }).val());
             //일요일 0~
             alert("date:" + date.getDay());

@@ -1,7 +1,5 @@
 const form = document.querySelector('#add-booking-form');
-const bookingList = document.querySelector('#booking-list');
 const tbl_booking_list = document.querySelector('#tbl_booking_list');
-const accountList = document.querySelector('#tbl_booking_list') ;
 
 //
 // //create element and render list
@@ -120,9 +118,9 @@ const accountList = document.querySelector('#tbl_booking_list') ;
 
 // saving data
 form.addEventListener('submit', (e) => {
-  alert(form.mydate.value)
+  alert(form.month.value)
     e.preventDefault();
-    db.collection('2020').add({
+    db.collection(form.year.value).doc(form.month.value).set({
         date: form.date.value,
         name: form.name.value,
         phone: form.phone.value,
@@ -133,6 +131,8 @@ form.addEventListener('submit', (e) => {
         month: form.month.value,
         day: form.day.value,
         mydate: form.mydate.value,
+        time: form.time.value,
+
     });
     form.date.value = '';
     form.name.value = '';
@@ -143,6 +143,10 @@ form.addEventListener('submit', (e) => {
     form.year.value  = '';
     form.month.value = '';
     form.mydate.value = '';
+    form.time.value = '';
+    form.day.value = '';
+
+
 });
 
 // real-time listener
@@ -202,6 +206,8 @@ function renderAccount(doc){
     let td_request = document.createElement('td');
     let td_tablenumber = document.createElement('td');
     let td_mydate = document.createElement('td');
+    let td_time = document.createElement('td');
+    // let td_mydate = document.createElement('td');
 
     tr.setAttribute('data-id', doc.id);
     td_date.textContent = doc.data().date;
@@ -211,15 +217,72 @@ function renderAccount(doc){
     td_request.textContent = doc.data().request;
     td_tablenumber.textContent = doc.data().tablenumber;
     td_mydate.textContent = doc.data().mydate;
-
+    td_time.textContent = doc.data().time;
     tr.appendChild(td_date);
     tr.appendChild(td_name);
     tr.appendChild(td_phone);
     tr.appendChild(td_partysize);
     tr.appendChild(td_request);
     tr.appendChild(td_tablenumber);
+    tr.appendChild(td_time);
     tr.appendChild(td_mydate);
 
-    accountList.appendChild(tr);
+    tbl_booking_list.appendChild(tr);
 
 }
+
+
+// <script>현재시간 표시
+  var today = new Date();
+  var month = new Array();
+  month[0] = "Jan";
+  month[1] = "Feb";
+  month[2] = "Mar";
+  month[3] = "Apr";
+  month[4] = "May";
+  month[5] = "Jun";
+  month[6] = "Jul";
+  month[7] = "Aug";
+  month[8] = "Sep";
+  month[9] = "Oct";
+  month[10] = "Nov";
+  month[11] = "Dec";
+  var enMonth = month[today.getMonth()];
+  var date = today.getDate() + '-' + enMonth + '-' + today.getFullYear();
+  // var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+  // var dateTime = date+' '+time;
+  var dateTime = date;
+  // <!--javascript output 출력-->
+  document.getElementById("current date and time").innerHTML = dateTime;
+// </script>
+
+
+
+//Date selecter
+// <script type="text/javascript">
+  $(function() {
+    $("#date").datepicker({
+      dateFormat: "D-dd-M-yy",
+      dayNamesMin: ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"],
+      monthNames: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+      onSelect: function(d) {
+        var arr = d.split("-");
+        var year = arr[3];
+        var month = arr[2];
+        var day = arr[1];
+        var weekday = arr[0];
+        var date = new Date($("#date").datepicker({
+          dateFormat: "dd-M-yy"
+        }).val());  //일요일 0~   // alert("date:" + date.getDay()); //
+        week = new Array("Su", "Mo", "Tu", "We", "Th", "Fr", "Sa");
+        // $("#mydate").text(week[date.getDay()]);
+        $("#mydate").val(weekday);
+        $("#year").val(year);
+        $("#month").val(month);
+        $("#day").val(day);
+        // alert("date:" + date.getDay());
+        alert(weekday);
+      }
+    });
+  });
+// </script>

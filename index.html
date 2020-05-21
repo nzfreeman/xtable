@@ -9,7 +9,8 @@
 <!-- <script src="https://code.jquery.com/jquery-1.12.4.js"></script> -->
 <!-- <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script> -->
 <link href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css" rel="Stylesheet" type="text/css" />
-<link href="styles.css" rel="Stylesheet" type="text/css" />
+<!-- <link href="styles.css" rel="Stylesheet" type="text/css" /> -->
+<link href="xtable.css" rel="Stylesheet" type="text/css" />
 
 <!-- <link rel="stylesheet" href="http://code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" type="text/css" /> -->
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
@@ -33,7 +34,7 @@
         </tbody>
       </table>
     </div>
-    <script>
+    <!-- <script>
       var today = new Date();
       var month = new Array();
       month[0] = "Jan";
@@ -55,7 +56,7 @@
       var dateTime = date;
       // <!--javascript output 출력-->
       document.getElementById("current date and time").innerHTML = dateTime;
-    </script>
+    </script> -->
     <!-- Calendar date and time  ends here -->
     <!-- Current time -->
     <h1 class="w3-xxxlarge w3-animate-bottom">X table booking</h1>
@@ -70,7 +71,7 @@
     <div border-style="solid" border-width="thin" border-color="lightblue" class="w3-half w3-container w3-blue w3-border">
       <!--jquery Date picker input field -->
       <form id="add-booking-form">
-      선택일 : <input type="text" size="13" id="date">
+      선택일 : <input type="text" placeholder="Pick Date"size="13" id="date">
       <input hidden type ="text" placeholder="year" name= "year" id="year">
       <input hidden type ="text" placeholder="month" name= "month" id="month">
       <input hidden type ="text" placeholder="day" name= "day" id="day">
@@ -86,34 +87,6 @@
         <!-- <button id="submit_btn" onclick="storeData()" align="center">Submit Booking</button> -->
       </form>
     </div>
-
-    <script type="text/javascript">
-      $(function() {
-        $("#date").datepicker({
-          dateFormat: "D-dd-M-yy",
-          dayNamesMin: ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"],
-          monthNames: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
-          onSelect: function(d) {
-            var arr = d.split("-");
-            var year = arr[3];
-            var month = arr[2];
-            var day = arr[1];
-            var weekday = arr[0];
-            var date = new Date($("#date").datepicker({
-              dateFormat: "dd-M-yy"
-            }).val());  //일요일 0~   // alert("date:" + date.getDay()); //
-            week = new Array("Su", "Mo", "Tu", "We", "Th", "Fr", "Sa");
-            // $("#mydate").text(week[date.getDay()]);
-            $("#mydate").val(weekday);
-            $("#year").val(year);
-            $("#month").val(month);
-            $("#day").val(day);
-            // alert("date:" + date.getDay());
-            alert(weekday);
-          }
-        });
-      });
-    </script>
     <!-- 2단 분리 왼쪽 박스 종료 -->
     <!-- 2단 분리 오른쪽박스시작 -->
     <div class="w3-half w3-container">
@@ -125,7 +98,9 @@
                      <th>PartySize</th>
                      <th>Request</th>
                      <th>TableNumber</th>
+                     <th>Time</th>
                      <th>mydate</th>
+
                  </thead>
 
              </table>

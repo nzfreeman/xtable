@@ -148,12 +148,13 @@ $(function() {
       db.collection("booking").where("date", "==", selecteddate).orderBy("Bookedtime2", "desc").onSnapshot(snapshot => {
         let changes = snapshot.docChanges();
         console.log("날짜선택시")
+        //테이블 내용을 지움
+                    document.getElementById("tbl_booking_list").innerHTML = "";
+                    //테이블 헤드를 다시 씀
+                    renderTableHead();
         changes.forEach(change => {
           // console.log(change.doc.data());
           if (change.type == 'added') {
-
-            document.getElementById("tbl_booking_list").innerHTML = "";
-            renderTableHead();
             renderBooking(change.doc);
           } else if (change.type == 'removed') {
             let tr = tbl_booking_list.querySelector('[data-id=' + change.doc.id + ']');
@@ -197,7 +198,6 @@ const tbl_booking_list = document.querySelector('#tbl_booking_list');
     renderTableHead();
     snapshot.docs.forEach(doc => {
       renderBooking(doc);
-      alert("첫화면용")
     });
   });
 // }
@@ -243,20 +243,29 @@ form.addEventListener('submit', (e) => {
 
 //
 // //
-// // //모든 부킹을 다 보여주는데, 정렬은 부킹된 날짜순, 앞으로의 부킹이 위로 오도록
-// db.collection("booking").orderBy("Bookedtime2", "desc").onSnapshot(snapshot => {
-//     let changes = snapshot.docChanges();
-//     changes.forEach(change => {
-//         console.log(change.doc.data());
-//         if(change.type == 'added'){
-//             renderBooking(change.doc);
-//             console.log("전체 부킹 추가되면 보여짐")
-//
-//         } else if (change.type == 'removed'){
-//             let tr = tbl_booking_list.querySelector('[data-id=' + change.doc.id + ']');
-//             tbl_booking_list.removeChild(tr);
-//             renderBooking(change.doc);
-//           console.log("지웠을때 보여짐")
-//         }
-//     });
-// });
+// //모든 부킹을 다 보여주는데, 정렬은 부킹된 날짜순, 앞으로의 부킹이 위로 오도록
+db.collection("booking").orderBy("Bookedtime2", "desc").onSnapshot(snapshot => {
+    let changes = snapshot.docChanges();
+    console.log("날짜선택시")
+    //테이블 내용을 지움
+                document.getElementById("tbl_booking_list").innerHTML = "";
+                //테이블 헤드를 다시 씀
+                renderTableHead();
+    changes.forEach(change => {
+        console.log(change.doc.data());
+        if(change.type == 'added'){
+            renderBooking(change.doc);
+            console.log("전체 부킹 추가되면 보여짐")
+
+        } else if (change.type == 'removed'){
+            let tr = tbl_booking_list.querySelector('[data-id=' + change.doc.id + ']');
+            tbl_booking_list.removeChild(tr);
+            //테이블 내용을 지움
+                        document.getElementById("tbl_booking_list").innerHTML = "";
+                        //테이블 헤드를 다시 씀
+                        renderTableHead();
+            renderBooking(change.doc);
+          console.log("지웠을때 보여짐")
+        }
+    });
+});

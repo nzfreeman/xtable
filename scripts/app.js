@@ -1,106 +1,180 @@
+// // VueFire setup starts from here ==========================================
+//
+// import Vue from 'vue'
+// import { firestorePlugin } from 'vuefire'
+//
+// Vue.use(firestorePlugin)
+// import firebase from 'firebase/app'
+// import 'firebase/firestore'
+//
+// // Get a Firestore instance
+// export const db = firebase
+//   .initializeApp({ projectId: 'xtableproject' })
+//   .firestore()
+//
+// // Export types that exists in Firestore
+// // This is not always necessary, but it's used in other examples
+// const { Timestamp, GeoPoint } = firebase.firestore
+// export { Timestamp, GeoPoint }
+//
+// // if using Firebase JS SDK < 5.8.0
+// db.settings({ timestampsInSnapshots: true })
+// // VueFire Setup Finish =================================================
+function renderTableHead(){
+  let thead = document.createElement('thead');
+  let th_date = document.createElement('th');
+  let th_name = document.createElement('th');
+  let th_phone = document.createElement('th');
+  let th_partysize = document.createElement('th');
+  let th_request = document.createElement('th');
+  let th_tablenumber = document.createElement('th');
+  let th_time = document.createElement('th');
+  let th_weekday = document.createElement('th');
+  th_date.textContent = "Date";
+  th_name.textContent = "Name";
+  th_phone.textContent = "Phone";
+  th_partysize.textContent = "PartySize";
+  th_request.textContent = "Request";
+  th_tablenumber.textContent = "TableNumber";
+  th_weekday.textContent = "Time";
+  th_time.textContent = "Weekday";
+  thead.appendChild(th_date);
+  thead.appendChild(th_name);
+  thead.appendChild(th_phone);
+  thead.appendChild(th_partysize);
+  thead.appendChild(th_request);
+  thead.appendChild(th_tablenumber);
+  thead.appendChild(th_time);
+  thead.appendChild(th_weekday);
+  tbl_booking_list.appendChild(thead);
+}
+
+function renderBooking(doc) {
+  // var elmtTable = document.getElementById('Ttbl_booking_list');
+  // var tableRows = elmtTable.getElementsById("tr");
+  // var rowCount = tableRows.length;
+  // for (var x = rowCount - 1; x > 0; x--) {
+  //     elmtTable.removeChild(tableRows[x]);
+  //   }
+  let tr = document.createElement('tr');
+  let td_date = document.createElement('td');
+  let td_name = document.createElement('td');
+  let td_phone = document.createElement('td');
+  let td_partysize = document.createElement('td');
+  let td_request = document.createElement('td');
+  let td_tablenumber = document.createElement('td');
+  let td_weekday = document.createElement('td');
+  let td_time = document.createElement('td');
+  // let td_weekday = document.createElement('td');
+  tr.setAttribute('data-id', doc.id);
+  td_date.textContent = doc.data().date;
+  td_name.textContent = doc.data().name;
+  td_phone.textContent = doc.data().phone;
+  td_partysize.textContent = doc.data().partysize;
+  td_request.textContent = doc.data().request;
+  td_tablenumber.textContent = doc.data().tablenumber;
+  td_weekday.textContent = doc.data().weekday;
+  td_time.textContent = doc.data().time;
+  tr.appendChild(td_date);
+  tr.appendChild(td_name);
+  tr.appendChild(td_phone);
+  tr.appendChild(td_partysize);
+  tr.appendChild(td_request);
+  tr.appendChild(td_tablenumber);
+  tr.appendChild(td_time);
+  tr.appendChild(td_weekday);
+
+  tbl_booking_list.appendChild(tr);
+
+}
+
+// <script>현재시간 표시
+var today = new Date();
+var month = new Array();
+month[0] = "Jan";
+month[1] = "Feb";
+month[2] = "Mar";
+month[3] = "Apr";
+month[4] = "May";
+month[5] = "Jun";
+month[6] = "Jul";
+month[7] = "Aug";
+month[8] = "Sep";
+month[9] = "Oct";
+month[10] = "Nov";
+month[11] = "Dec";
+var enMonth = month[today.getMonth()];
+var date = today.getDate() + '-' + enMonth + '-' + today.getFullYear();
+console.log("현재시간 날짜: " + date);
+// var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+// var dateTime = date+' '+time;
+var dateTime = date;
+// <!--javascript output 출력-->
+document.getElementById("current date and time").innerHTML = dateTime;
+// </script>
+
+
+//Date selecter
+// <script type="text/javascript">
+$(function() {
+  $("#date").datepicker({
+    dateFormat: "D-dd-M-yy",
+    dayNamesMin: ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"],
+    monthNames: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+    onSelect: function(d) {
+        $('#tb').empty()
+      var arr = d.split("-");
+      var year = arr[3];
+      var month = arr[2];
+      var day = arr[1];
+      var weekday = arr[0];
+      // var date2 = new Date($("#date").datepicker({
+      //   dateFormat: "dd-M-yy"
+      // }).val()); //일요일 0~   // alert("date:" + date.getDay()); //
+      // week = new Array("Su", "Mo", "Tu", "We", "Th", "Fr", "Sa");
+      // // $("#weekday").text(week[date.getDay()]);
+      $("#weekday").val(weekday);
+      $("#year").val(year);
+      $("#month").val(month);
+      $("#day").val(day);
+      // alert("date:" + date.getDay());
+      var selecteddate = $(this).val();
+      console.log(selecteddate)
+      // var selecteddate = print(k)
+
+
+
+
+      db.collection("booking").where("date", "==", selecteddate).orderBy("Bookedtime2", "desc").onSnapshot(snapshot => {
+        let changes = snapshot.docChanges();
+        console.log("날짜선택시")
+        changes.forEach(change => {
+          // console.log(change.doc.data());
+          if (change.type == 'added') {
+
+            document.getElementById("tbl_booking_list").innerHTML = "";
+            renderTableHead();
+            renderBooking(change.doc);
+          } else if (change.type == 'removed') {
+            let tr = tbl_booking_list.querySelector('[data-id=' + change.doc.id + ']');
+            tbl_booking_list.removeChild(tr);
+            document.getElementById("tbl_booking_list").innerHTML = "";
+            renderTableHead();
+            renderBooking(change.doc);
+            // location.reload(true);
+
+          }
+        });
+      });
+    }
+  });
+});
+// </script>
+
 const form = document.querySelector('#add-booking-form');
 const tbl_booking_list = document.querySelector('#tbl_booking_list');
 
-//
-// //create element and render list
-// function renderBooklist(doc){
-//     let li = document.createElement('li');
-//     let year = document.createElement('span');
-//     let month = document.createElement('span');
-//     let day = document.createElement('span');
-//     let table = document.createElement('span');
-//     let name = document.createElement('span');
-//     let time = document.createElement('span');
-//     let phone = document.createElement('span');
-//     let size = document.createElement('span');
-//     let request = document.createElement('span');
-//     let weekday = document.createElement('span');
-//     let cross = document.createElement('div');
-//
-//
-//     li.setAttribute('data-id', doc.id);
-//     year.textContent = doc.data().year;
-//     month.textContent = doc.data().month;
-//     day.textContent = doc.data().day;
-//     table.textContent = doc.data().table;
-//     name.textContent = doc.data().name;
-//     time.textContent = doc.data().time;
-//     phone.textContent = doc.data().phone;
-//     size.textContent = doc.data().size;
-//     request.textContent = doc.data().request;
-//     weekday.textContent = doc.data().weekday;
-//     cross.textContent = 'del';
-//
-//     li.appendChild(year);
-//     li.appendChild(month);
-//     li.appendChild(day);
-//     li.appendChild(table);
-//     li.appendChild(name);
-//     li.appendChild(time);
-//     li.appendChild(phone);
-//     li.appendChild(size);
-//     li.appendChild(weekday);
-//     li.appendChild(request);
-//     li.appendChild(cross);
-//
-//     booklist.appendChild(li);
-//   }
-//
-//
-// // function getdatafromFirestore() {
-//   db.collection('booking').get().then((snapshot) => {
-// snapshot.docs.forEach(doc => {
-//   renderBooklist(doc);
-// });
-// });
-// // }
 
-//
-//
-// // create element & render cafe
-// function renderBooking(doc){
-//     let li = document.createElement('li');
-//     let name = document.createElement('p');
-//     let date = document.createElement('p');
-//     let phone = document.createElement('p');
-//     let partysize = document.createElement('p');
-//     let request = document.createElement('p');
-//     let tablenumber = document.createElement('p');
-//     let mydate = document.createElement('p');
-//     let year = document.createElement('p');
-//     let month = document.createElement('p');
-//     let day = document.createElement('p');
-//
-//     let cross = document.createElement('div');
-//
-//     li.setAttribute('data-id', doc.id);
-//     date.textContent = doc.data().date;
-//     name.textContent = doc.data().name;
-//     phone.textContent = doc.data().phone;
-//     partysize.textContent = doc.data().partysize;
-//     request.textContent = doc.data().request;
-//     tablenumber.textContent = doc.data().tablenumber;
-//     mydate.textContent = doc.data().mydate;
-//     year.textContent = doc.data().year;
-//     month.textContent = doc.data().month;
-//     day.textContent = doc.data().day;
-//     cross.textContent = 'del';
-//
-//     li.appendChild(name);
-//     li.appendChild(date);
-//     li.appendChild(name);
-//     li.appendChild(phone);
-//     li.appendChild(partysize);
-//     li.appendChild(request);
-//     li.appendChild(tablenumber);
-//     li.appendChild(mydate);
-//     li.appendChild(year);
-//     li.appendChild(month);
-//     li.appendChild(day);
-//     li.appendChild(cross);
-//
-//     bookingList.appendChild(li);
-//
 //     // deleting data
 //     cross.addEventListener('click', (e) => {
 //         e.stopPropagation();
@@ -116,173 +190,73 @@ const tbl_booking_list = document.querySelector('#tbl_booking_list');
 //     });
 // });
 
+//==========================================첫 화면에서 오늘 날짜의 부킹만 보여줌
+// function firstPage() {
+  db.collection("booking").where("date_no_weekday", "==", date).get().then(snapshot => {
+    console.log("첫화면에서 보여지는 날짜: " + date);
+    renderTableHead();
+    snapshot.docs.forEach(doc => {
+      renderBooking(doc);
+      alert("첫화면용")
+    });
+  });
+// }
+//==========================================첫 화면에서 오늘 날짜의 부킹만 보여줌
+
+
+
 // saving data
 form.addEventListener('submit', (e) => {
-  alert(form.month.value)
-    e.preventDefault();
-    db.collection(form.year.value).doc(form.month.value).set({
-        date: form.date.value,
-        name: form.name.value,
-        phone: form.phone.value,
-        partysize: form.partysize.value,
-        request: form.request.value,
-        tablenumber: form.tablenumber.value,
-        year: form.year.value,
-        month: form.month.value,
-        day: form.day.value,
-        mydate: form.mydate.value,
-        time: form.time.value,
-
-    });
-    form.date.value = '';
-    form.name.value = '';
-    form.phone.value = '';
-    form.partysize.value = '';
-    form.request.value = '';
-    form.tablenumber.value = '';
-    form.year.value  = '';
-    form.month.value = '';
-    form.mydate.value = '';
-    form.time.value = '';
-    form.day.value = '';
-
-
+  // alert(form.month.value)
+  e.preventDefault();
+  db.collection("booking").doc().set({
+    date: form.date.value,
+    date_no_weekday: form.day.value + "-" + form.month.value + "-" + form.year.value,
+    name: form.name.value,
+    phone: form.phone.value,
+    partysize: form.partysize.value,
+    request: form.request.value,
+    tablenumber: form.tablenumber.value,
+    year: form.year.value,
+    month: form.month.value,
+    day: form.day.value,
+    weekday: form.weekday.value,
+    time: form.time.value,
+    Bookedtime: firebase.firestore.Timestamp.now(), //부킹된 시각을 기록
+    Bookedtime2: firebase.firestore.Timestamp.fromDate(new Date(form.date.value))
+    //부킹된 s날짜를 타임스탬프로 기록
+  });
+  alert("date: " + form.date.value + " Name: " + form.name.value + " Weekday: " + form.weekday.value);
+  form.date.value = '';
+  form.name.value = '';
+  form.phone.value = '';
+  form.partysize.value = '';
+  form.request.value = '';
+  form.tablenumber.value = '';
+  form.year.value = '';
+  form.month.value = '';
+  form.weekday.value = '';
+  form.time.value = '';
+  form.day.value = '';
+  console.log("파이어스토어에 데이터 저장됨")
 });
 
-// real-time listener
-// db.collection('2020').orderBy('date').onSnapshot(snapshot => {
+//
+// //
+// // //모든 부킹을 다 보여주는데, 정렬은 부킹된 날짜순, 앞으로의 부킹이 위로 오도록
+// db.collection("booking").orderBy("Bookedtime2", "desc").onSnapshot(snapshot => {
 //     let changes = snapshot.docChanges();
 //     changes.forEach(change => {
-//         // console.log(change.doc.data());
+//         console.log(change.doc.data());
 //         if(change.type == 'added'){
 //             renderBooking(change.doc);
+//             console.log("전체 부킹 추가되면 보여짐")
+//
 //         } else if (change.type == 'removed'){
-//             let li = bookingList.querySelector('[data-id=' + change.doc.id + ']');
-//             bookingList.removeChild(li);
+//             let tr = tbl_booking_list.querySelector('[data-id=' + change.doc.id + ']');
+//             tbl_booking_list.removeChild(tr);
+//             renderBooking(change.doc);
+//           console.log("지웠을때 보여짐")
 //         }
 //     });
 // });
-db.collection('2020').orderBy('date').onSnapshot(snapshot => {
-    let changes = snapshot.docChanges();
-    changes.forEach(change => {
-        // console.log(change.doc.data());
-        if(change.type == 'added'){
-            renderAccount(change.doc);
-        } else if (change.type == 'removed'){
-            let tr = tbl_booking_list.querySelector('[data-id=' + change.doc.id + ']');
-            tbl_booking_list.removeChild(tr);
-        }
-    });
-});
-// updating records (console demo)
-// db.collection('cafes').doc('DOgwUvtEQbjZohQNIeMr').update({
-//     name: 'mario world'
-// });
-
-// db.collection('cafes').doc('DOgwUvtEQbjZohQNIeMr').update({
-//     city: 'hong kong'
-// });
-
-// setting data
-// db.collection('cafes').doc('DOgwUvtEQbjZohQNIeMr').set({
-//     city: 'hong kong'
-// });
-
-
-
-//
-// db.collection('2020').get().then((snapshot) => {
-//                 snapshot.docs.forEach(doc => {
-//                     renderAccount(doc);
-//                 })
-//             })
-
-function renderAccount(doc){
-    let tr = document.createElement('tr');
-    let td_date = document.createElement('td');
-    let td_name = document.createElement('td');
-    let td_phone = document.createElement('td');
-    let td_partysize = document.createElement('td');
-    let td_request = document.createElement('td');
-    let td_tablenumber = document.createElement('td');
-    let td_mydate = document.createElement('td');
-    let td_time = document.createElement('td');
-    // let td_mydate = document.createElement('td');
-
-    tr.setAttribute('data-id', doc.id);
-    td_date.textContent = doc.data().date;
-    td_name.textContent = doc.data().name;
-    td_phone.textContent = doc.data().phone;
-    td_partysize.textContent = doc.data().partysize;
-    td_request.textContent = doc.data().request;
-    td_tablenumber.textContent = doc.data().tablenumber;
-    td_mydate.textContent = doc.data().mydate;
-    td_time.textContent = doc.data().time;
-    tr.appendChild(td_date);
-    tr.appendChild(td_name);
-    tr.appendChild(td_phone);
-    tr.appendChild(td_partysize);
-    tr.appendChild(td_request);
-    tr.appendChild(td_tablenumber);
-    tr.appendChild(td_time);
-    tr.appendChild(td_mydate);
-
-    tbl_booking_list.appendChild(tr);
-
-}
-
-
-// <script>현재시간 표시
-  var today = new Date();
-  var month = new Array();
-  month[0] = "Jan";
-  month[1] = "Feb";
-  month[2] = "Mar";
-  month[3] = "Apr";
-  month[4] = "May";
-  month[5] = "Jun";
-  month[6] = "Jul";
-  month[7] = "Aug";
-  month[8] = "Sep";
-  month[9] = "Oct";
-  month[10] = "Nov";
-  month[11] = "Dec";
-  var enMonth = month[today.getMonth()];
-  var date = today.getDate() + '-' + enMonth + '-' + today.getFullYear();
-  // var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
-  // var dateTime = date+' '+time;
-  var dateTime = date;
-  // <!--javascript output 출력-->
-  document.getElementById("current date and time").innerHTML = dateTime;
-// </script>
-
-
-
-//Date selecter
-// <script type="text/javascript">
-  $(function() {
-    $("#date").datepicker({
-      dateFormat: "D-dd-M-yy",
-      dayNamesMin: ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"],
-      monthNames: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
-      onSelect: function(d) {
-        var arr = d.split("-");
-        var year = arr[3];
-        var month = arr[2];
-        var day = arr[1];
-        var weekday = arr[0];
-        var date = new Date($("#date").datepicker({
-          dateFormat: "dd-M-yy"
-        }).val());  //일요일 0~   // alert("date:" + date.getDay()); //
-        week = new Array("Su", "Mo", "Tu", "We", "Th", "Fr", "Sa");
-        // $("#mydate").text(week[date.getDay()]);
-        $("#mydate").val(weekday);
-        $("#year").val(year);
-        $("#month").val(month);
-        $("#day").val(day);
-        // alert("date:" + date.getDay());
-        alert(weekday);
-      }
-    });
-  });
-// </script>

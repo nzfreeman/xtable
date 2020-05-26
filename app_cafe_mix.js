@@ -51,12 +51,12 @@ function renderBooking(doc){
     cross.addEventListener('click', (e) => {
         e.stopPropagation();
         let id = e.target.parentElement.getAttribute('data-id');
-        db.collection('2020').doc(id).delete();
+        db.collection('booking').doc(id).delete();
     });
 }
 
 // getting data
-db.collection('2020').doc().get().then(snapshot => {
+db.collection('booking').doc().get().then(snapshot => {
     snapshot.docs.forEach(doc => {
         renderBooking(doc);
     });
@@ -65,7 +65,7 @@ db.collection('2020').doc().get().then(snapshot => {
 // saving data
 form.addEventListener('submit', (e) => {
     e.preventDefault();
-    db.collection('2020').add({
+    db.collection('booking').add({
         date: form.date.value,
         name: form.name.value,
         phone: form.phone.value,
@@ -89,7 +89,7 @@ form.addEventListener('submit', (e) => {
 });
 
 // real-time listener
-db.collection('2020').orderBy('date').onSnapshot(snapshot => {
+db.collection('booking').orderBy('date').onSnapshot(snapshot => {
     let changes = snapshot.docChanges();
     changes.forEach(change => {
         // console.log(change.doc.data());
@@ -101,18 +101,18 @@ db.collection('2020').orderBy('date').onSnapshot(snapshot => {
         }
     });
 });
-db.collection('2020').orderBy('date').onSnapshot(snapshot => {
-    let changes = snapshot.docChanges();
-    changes.forEach(change => {
-        // console.log(change.doc.data());
-        if(change.type == 'added'){
-            renderAccount(change.doc);
-        } else if (change.type == 'removed'){
-            let tr = tbl_booking_list.querySelector('[data-id=' + change.doc.id + ']');
-            tbl_booking_list.removeChild(tr);
-        }
-    });
-});
+// db.collection('booking').orderBy('date').onSnapshot(snapshot => {
+//     let changes = snapshot.docChanges();
+//     changes.forEach(change => {
+//         // console.log(change.doc.data());
+//         if(change.type == 'added'){
+//             renderAccount(change.doc);
+//         } else if (change.type == 'removed'){
+//             let tr = tbl_booking_list.querySelector('[data-id=' + change.doc.id + ']');
+//             tbl_booking_list.removeChild(tr);
+//         }
+//     });
+// });
 // updating records (console demo)
 // db.collection('cafes').doc('DOgwUvtEQbjZohQNIeMr').update({
 //     name: 'mario world'
@@ -130,7 +130,7 @@ db.collection('2020').orderBy('date').onSnapshot(snapshot => {
 
 
 
-db.collection('2020').get().then((snapshot) => {
+db.collection('booking').get().then((snapshot) => {
                 snapshot.docs.forEach(doc => {
                     renderAccount(doc);
                 })

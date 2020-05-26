@@ -6,9 +6,12 @@
 <!-- Header -->
 <!-- <header class="w3-container w3-theme w3-padding" id="myHeader"> -->
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<!-- <script src="https://code.jquery.com/jquery-1.12.4.js"></script> -->
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.min.js"></script>
+
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://unpkg.com/vue-firestore"></script>
 <!-- <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script> -->
-<link href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css" rel="Stylesheet" type="text/css" />
+<!-- <link href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css" rel="Stylesheet" type="text/css" /> -->
 <!-- <link href="styles.css" rel="Stylesheet" type="text/css" /> -->
 <link href="xtable.css" rel="Stylesheet" type="text/css" />
 
@@ -19,7 +22,7 @@
 <!-- css파일이 오류인 경우에 xtable/css로 경로를 변경하면 됩니다. -->
 </head>
 <!-- 바디섹션의 시작부분 -->
-<body onload="startTime()">
+<body onload=startTime()>
   <div aling="center" class="w3-center">
     <!-- Header Notice postion -->
     <h4 >Xtable Booking Notice</h4>
@@ -55,8 +58,7 @@
       // var dateTime = date+' '+time;
       var dateTime = date;
       // <!--javascript output 출력-->
-      document.getElementById("current date and time").innerHTML = dateTime;
-    </script> -->
+
     <!-- Calendar date and time  ends here -->
     <!-- Current time -->
     <h1 class="w3-xxxlarge w3-animate-bottom">X table booking</h1>
@@ -71,27 +73,28 @@
     <div border-style="solid" border-width="thin" border-color="lightblue" class="w3-half w3-container w3-blue w3-border">
       <!--jquery Date picker input field -->
       <form id="add-booking-form">
-      선택일 : <input type="text" placeholder="Pick Date"size="13" id="date">
+      <input type="text" autocomplete="off" placeholder="Pick Date" size="13" id="date">
       <input hidden type ="text" placeholder="year" name= "year" id="year">
       <input hidden type ="text" placeholder="month" name= "month" id="month">
       <input hidden type ="text" placeholder="day" name= "day" id="day">
-      <input hidden type ="text" placeholder="weekday" name= "mydate" id="mydate">
-      Time: <input id="time_field" size="21" name="time"placeholder="time" type="text">
-      Name: <input id="name_field" size="21" name="name" placeholder="name" type="text">
-      Phone: <input id="phone_field" size="21" name="phone" placeholder="phone" type="text">
-      Party Size? : <input id="how_many_field" size="20" placeholder="partysize" name="partysize" type="text">
-      Table No.: <input id="c_table" size="18" name="tablenumber" placeholder="tablenumber" type="text">
-      Any request?: <input id="anything_field" size="14" placeholder="request" name="request" type="text">
+      <input hidden type ="text" placeholder="weekday" name= "weekday" id="weekday">
+      <input id="time_field" autocomplete="off" size="21" name="time" placeholder="time" type="text">
+      <input id="name_field" autocomplete="off" size="21" name="name" placeholder="name" type="text">
+      <input id="phone_field" autocomplete="off" size="21" name="phone" placeholder="phone" type="text">
+      <input id="how_many_field" autocomplete="off" size="20" placeholder="partysize" name="partysize" type="text">
+      <input id="c_table" size="18" autocomplete="off" name="tablenumber" placeholder="tablenumber" type="text">
+      <input id="anything_field" autocomplete="off" size="14" placeholder="request" name="request" type="text">
       <br><button align="center">Submit Booking</button>
         <!-- 버튼 ID 삭제 -->
         <!-- <button id="submit_btn" onclick="storeData()" align="center">Submit Booking</button> -->
       </form>
+      <br>
     </div>
     <!-- 2단 분리 왼쪽 박스 종료 -->
     <!-- 2단 분리 오른쪽박스시작 -->
     <div class="w3-half w3-container">
       <table id="tbl_booking_list" border="2" cellpadding="5" style="border-collapse:collapse;">
-                 <thead>
+                 <!-- <thead>
                      <th>Date</th>
                      <th>NAME</th>
                      <th>Phone</th>
@@ -99,22 +102,10 @@
                      <th>Request</th>
                      <th>TableNumber</th>
                      <th>Time</th>
-                     <th>mydate</th>
-
-                 </thead>
-
+                     <th>Weekday</th>
+                 </thead> -->
              </table>
-
-
       <br>
-      <!-- <div class = "content">
-      <form id="add-booking"></form>
-      <input type="text" name="city" placeholder="Cafe city">
-      <input type="text" name="name2" placeholder="name2">
-<button> add cafe</button>
-      <ul id="output_list"> dddd</ul>
-
-</div> -->
 
     </div>
 

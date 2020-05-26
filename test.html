@@ -1,24 +1,84 @@
-<!DOCTYPE html>
-<html lang="en" dir="ltr">
-  <head>
-    <meta charset="utf-8">
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-    <script src="http://code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<!DOCTYPE html> <html lang="en">
+<head>
+  <meta charset="UTF-8">
+   <title>UI Demo</title>
 
-    <title>test</title>
-  </head>
-  <body>
+<link href="Styles.css" rel="stylesheet" type="text/css">
+<script src="Scripts.js">addName.counterRows = 0;</script>
 
-<div id="app">
-  {{message}}
+</head> <body> <div id="container"> <div id="uiContainer"> Full Name : <input id="Name" type="text" name="Name"> Age : <input id="Age" type="number" name="Age">
+
+<button onclick="addName(document.getElementById('Name').value,
+ document.getElementById('Age').value,
+document.getElementById('counter').value)">Add</button>
+
+<table id="namesTable"> <tr> <th>First Name</th> <th>Last Name</th> <th>Age</th> </tr> <tr>
+
+</tr> </table> </div>
+
+<div id="counterDiv"> Total Records : <input id="counter" type="number" value="0" readonly>
+
 </div>
-<div id="app2">
-  <span v-if ="seen"> Now you see me</span>
 
 </div>
 
-  <script src="test.js"></script>
-  </body>
-</html>
+
+
+<table style="width:100%" id="ex-table">
+  <tr id="tr">
+    <th>Tipo de la Denuncia:</th>
+    <th>Dirección:</th>
+    <th>Descripción:</th>
+    <th>Correo:</th>
+    <th>Creda por:</th>
+    <th>Imagen</th>
+    <th>Lat - Long</th>
+ </table>
+ db.collection("booking").where("date", "==", selecteddate).orderBy("Bookedtime2", "desc").onSnapshot(snapshot => {
+   let changes = snapshot.docChanges();
+<script>
+    db.collection("booking")..onSnapshot(snapshot =>{
+        if(snapshot.exists()){
+            var content = '';
+            snapshot.forEach(function(data){
+                var val = data.val();
+                content +='<tr>';
+                content += '<td>' + val.name + '</td>';
+                content += '<td>' + val.phone + '</td>';
+                content += '<td>' + val.partysize + '</td>';
+                content += '<td>' + val.tablenumber + '</td>';
+                content += '<td>' + val.time + '</td>';
+                content += '<td>' + val.weekday + '</td>';
+                content += '<td>' + val.request + '</td>';
+                content += '</tr>';
+            });
+            $('#ex-table').append(content);
+        }
+    });
+</script>
+<script src="scripts/datepicker.js"></script>
+<!-- The core Firebase JS SDK is always required and must be listed first -->
+<script src="https://www.gstatic.com/firebasejs/7.14.4/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.14.4/firebase-firestore.js"></script>
+<!-- TODO: Add SDKs for Firebase products that you want to use
+   https://firebase.google.com/docs/web/setup#available-libraries -->
+<script src="https://www.gstatic.com/firebasejs/7.14.4/firebase-analytics.js"></script>
+<script>
+  // Your web app's Firebase configuration
+  var firebaseConfig = {
+    apiKey: "AIzaSyAh247r4SkCp3EPAWOAytTgmgOahGBMVUo",
+    authDomain: "xtableproject.firebaseapp.com",
+    databaseURL: "https://xtableproject.firebaseio.com",
+    projectId: "xtableproject",
+    storageBucket: "xtableproject.appspot.com",
+    messagingSenderId: "489595774277",
+    appId: "1:489595774277:web:6bf0bce1106ee9512aca2c",
+    measurementId: "G-C16JPW8BY2"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+  firebase.analytics();
+  const db = firebase.firestore();
+</script>
+</body>
+</html>;

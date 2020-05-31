@@ -1,41 +1,49 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
+
 <head>
-<title>X-table Booking by Justin Lee</title>
-<!-- Header -->
-<meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<!-- <header class="w3-container w3-theme w3-padding" id="myHeader"> -->
-<!-- <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.min.js"></script> -->
+  <title>X-table Booking by Justin Lee</title>
+  <!-- Header -->
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- <header class="w3-container w3-theme w3-padding" id="myHeader"> -->
+  <!-- <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.min.js"></script> -->
 
-<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-<!-- <script src="https://unpkg.com/vue-firestore"></script> -->
-<!-- <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script> -->
-<!-- <link href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css" rel="Stylesheet" type="text/css" /> -->
-<!-- <link href="styles.css" rel="Stylesheet" type="text/css" /> -->
-<link href="xtable.css" rel="Stylesheet" type="text/css" />
-
-<!-- <link rel="stylesheet" href="http://code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" type="text/css" /> -->
-<script src="jquery.min.js"></script>
-<script src="http://code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>
-<script src="scripts/current_time.js"></script>
-<!-- css파일이 오류인 경우에 xtable/css로 경로를 변경하면 됩니다. -->
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <!-- <script src="https://unpkg.com/vue-firestore"></script> -->
+  <!-- <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script> -->
+  <!-- <link href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css" rel="Stylesheet" type="text/css" /> -->
+  <!-- <link href="styles.css" rel="Stylesheet" type="text/css" /> -->
+  <link href="xtable.css" rel="Stylesheet" type="text/css" />
+<style> input[type='submit'] {
+       position: absolute;
+  }</style>
+  <!-- <link rel="stylesheet" href="http://code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" type="text/css" /> -->
+  <script src="jquery.min.js"></script>
+  <script src="http://code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>
+  <script src="scripts/current_time.js"></script>
+  <!-- css파일이 오류인 경우에 xtable/css로 경로를 변경하면 됩니다. -->
 </head>
 <!-- 바디섹션의 시작부분 -->
+
 <body onload="startTime()">
   <div aling="center" class="w3-center">
     <!-- Header Notice postion -->
     <h4 align="center">Xtable Booking Notice<br>인터넷 익스플로러는 지원하지 않습니다.
       <br>지점별 주소, 전화번호, 가격 등을 표시할 수 있습니다.<br>
-    첫화면은 전체 부킹(추후 오늘날짜 이후만 표시되도록 할 예정입니다.<br></h4>
+      첫화면은 전체 부킹(추후 오늘날짜 이후만 표시되도록 할 예정입니다.<br></h4>
     <!-- Calendar date and time   begin here -->
     <div aling="center">
       <table align="center">
         <tbody>
           <tr align="center">
-            <th> <p align="center" id="current date and time"></p></th>
-            <th> <p align="center" id="current_time"></p></th>
+            <th>
+              <p align="center" id="current date and time"></p>
+            </th>
+            <th>
+              <p align="center" id="current_time"></p>
+            </th>
           </tr>
         </tbody>
       </table>
@@ -76,49 +84,58 @@
     <div border-style="solid" border-width="thin" border-color="lightblue" class="w3-half w3-container w3-blue w3-border">
       <!--jquery Date picker input field -->
       <form id="add-booking-form">
-      <input type="text" autocomplete="off" placeholder="Pick Date" size="13" id="date">
-      <input hidden type ="text" placeholder="year" name= "year" id="year">
-      <input hidden type ="text" placeholder="month" name= "month" id="month">
-      <input hidden type ="text" placeholder="day" name= "day" id="day">
-      <input hidden type ="text" placeholder="weekday" name= "weekday" id="weekday">
-      <input id="time_field" autocomplete="off" size="21" name="time" placeholder="time" type="text">
-      <input id="name_field" autocomplete="off" size="21" name="name" placeholder="name" type="text">
-      <input id="phone_field" autocomplete="off" size="21" name="phone" placeholder="phone" type="text">
-      <br><input id="how_many_field" autocomplete="off" size="20" placeholder="partysize" name="partysize" type="text">
-      <input id="c_table" size="18" autocomplete="off" name="tablenumber" placeholder="tablenumber" type="text">
-      <input id="anything_field" autocomplete="off" size="14" placeholder="request" name="request" type="text">
-      <br><button align="center">Submit Booking</button>
+        <input type="text" autocomplete="off" placeholder="Pick Date" size="13" id="date">
+        <input hidden type="text" placeholder="year" name="year" id="year">
+        <input hidden type="text" placeholder="month" name="month" id="month">
+        <input hidden type="text" placeholder="day" name="day" id="day">
+        <input hidden type="text" placeholder="weekday" name="weekday" id="weekday">
+        <input id="time_field" autocomplete="off" size="21" name="time" placeholder="time" type="text">
+        <input id="name_field" autocomplete="off" size="21" name="name" placeholder="name" type="text">
+        <input id="phone_field" autocomplete="off" size="21" name="phone" placeholder="phone" type="text">
+        <br><input id="how_many_field" autocomplete="off" size="20" placeholder="partysize" name="partysize" type="text">
+        <input id="c_table" size="18" autocomplete="off" name="tablenumber" placeholder="tablenumber" type="text">
+        <input id="anything_field" autocomplete="off" size="14" placeholder="request" name="request" type="text">
+        <br>
+        <table><tr> <input type="submit" id="btn" value="Submit!"><tr></table>
         <!-- 버튼 ID 삭제 -->
+        <script> var btn = document.getElementById("btn");
+        btn.style.left = Math.floor((Math.random() * 300) + 1) + "px";
+        btn.style.Top = Math.floor((Math.random() * 0) + 500) + "px";
+
+      </script>
         <!-- <button id="submit_btn" onclick="storeData()" align="center">Submit Booking</button> -->
       </form>
       <br>
     </div>
-    <div><button type="button" name="button_print" onclick="print(tbl_booking_list)">print</button>
+
+    <br>
+<br>
+<div><button type="button" name="button_print" onclick="print(tbl_booking_list)">print</button>
     </div>
+
     <!-- 2단 분리 왼쪽 박스 종료 -->
     <!-- 2단 분리 오른쪽박스시작 -->
-    <div class="w3-half w3-container">
+<div class="w3-half w3-container">
       <table id="tbl_booking_list" border="2" cellpadding="5" style="border-collapse:collapse;">
-                 <!-- <thead>
+        <thead>
                      <th>Date</th>
+                     <th>Time</th>
                      <th>NAME</th>
                      <th>Phone</th>
                      <th>PartySize</th>
                      <th>Request</th>
-                     <th>TableNumber</th>
-                     <th>Time</th>
-                     <th>Weekday</th>
-                 </thead> -->
-             </table>
-      <br>
+                     <!-- <th>TableNumber</th> -->
+                     <!-- <th>Weekday</th> -->
+                 </thead>
+      </table>
+<br>
 
-    </div>
+ </div>
 
   </div>
-  <br />2단 박스<br />
+  <br>2단 박스<br />
   <div>
   </div>
-  <!-- 2단 분리 박스 종료 -->
 
   <script src="scripts/datepicker.js"></script>
   <!-- The core Firebase JS SDK is always required and must be listed first -->
@@ -145,12 +162,12 @@
     const db = firebase.firestore();
   </script>
   <!-- <script src = "scripts/firestore_storedata.js"></script> -->
-  <script src="scripts/app.js"></script>
+  <script src="scripts/c_app.js"></script>
   <!-- <script src="scripts/firestore_storedata.js"></script> -->
 
   <script>
 
-    </script>
+  </script>
 
 </body>
 

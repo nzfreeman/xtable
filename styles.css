@@ -1,3 +1,17 @@
+#container { border: 4px solid darkblue; border-radius: 25px; padding: 30px;
+/*center the container*/ width: 960px; margin: 0 auto; }
+#Name { /* For Later Use */ }
+#Age { /* For Later Use */ }
+#namesTable tr:nth-child(even) { background: dimgray;}
+#namesTable tr:nth-child(odd) { background: lightgray;}
+#namesTable th { margin-top: 50px; background: royalblue; }
+#namesTable { width: 100%; border-collapse: separate; empty-cells: show; }
+#namesTable tr { /*display:block;*/ min-height:20px; }
+#counterDiv { float: right; padding-bottom: 10px; }
+#counter { float: right; border: none; width: 30px; }
+
+
+
 /* body{
     background: #eab0dc;
     font-family: ubuntu;

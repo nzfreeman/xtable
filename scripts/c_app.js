@@ -1,3 +1,6 @@
+
+const form = document.querySelector('#add-booking-form');
+const tbl_booking_list = document.querySelector('#tbl_booking_list');
 // // VueFire setup starts from here ==========================================
 //
 // import Vue from 'vue'
@@ -23,20 +26,20 @@
 function renderTableHead(){
   let thead = document.createElement('thead');
   let th_date = document.createElement('th');
+  let th_time = document.createElement('th');
   let th_name = document.createElement('th');
   let th_phone = document.createElement('th');
   let th_partysize = document.createElement('th');
   let th_request = document.createElement('th');
-  let th_tablenumber = document.createElement('th');
-  let th_time = document.createElement('th');
+  // let th_tablenumber = document.createElement('th');
   // let th_weekday = document.createElement('th');
   th_date.textContent = "Date";
+  th_time.textContent = "Time";
   th_name.textContent = "Name";
   th_phone.textContent = "Phone";
-  th_partysize.textContent = "Party Size";
+  th_partysize.textContent = "PartySize";
   th_request.textContent = "Request";
-  th_time.textContent = "Time";
-  th_tablenumber.textContent = "Table Number";
+  // th_tablenumber.textContent = "TableNumber";
   // th_weekday.textContent = "Weekday";
   thead.appendChild(th_date);
   thead.appendChild(th_time);
@@ -44,26 +47,21 @@ function renderTableHead(){
   thead.appendChild(th_phone);
   thead.appendChild(th_partysize);
   thead.appendChild(th_request);
-  thead.appendChild(th_tablenumber);
+  // thead.appendChild(th_tablenumber);
   // thead.appendChild(th_weekday);
   tbl_booking_list.appendChild(thead);
 }
 
 function renderBooking(doc) {
-  // var elmtTable = document.getElementById('Ttbl_booking_list');
-  // var tableRows = elmtTable.getElementsById("tr");
-  // var rowCount = tableRows.length;
-  // for (var x = rowCount - 1; x > 0; x--) {
-  //     elmtTable.removeChild(tableRows[x]);
-  //   }
   let tr = document.createElement('tr');
   let td_date = document.createElement('td');
+  let td_time = document.createElement('td');
   let td_name = document.createElement('td');
   let td_phone = document.createElement('td');
   let td_partysize = document.createElement('td');
   let td_request = document.createElement('td');
-  let td_tablenumber = document.createElement('td');
-  let td_time = document.createElement('td');
+  // let td_tablenumber = document.createElement('td');
+  // let td_weekday = document.createElement('td');
   // let td_weekday = document.createElement('td');
   tr.setAttribute('data-id', doc.id);
   td_date.textContent = doc.data().date;
@@ -72,7 +70,7 @@ function renderBooking(doc) {
   td_phone.textContent = doc.data().phone;
   td_partysize.textContent = doc.data().partysize;
   td_request.textContent = doc.data().request;
-  td_tablenumber.textContent = doc.data().tablenumber;
+  // td_tablenumber.textContent = doc.data().tablenumber;
   // td_weekday.textContent = doc.data().weekday;
   tr.appendChild(td_date);
   tr.appendChild(td_time);
@@ -80,12 +78,12 @@ function renderBooking(doc) {
   tr.appendChild(td_phone);
   tr.appendChild(td_partysize);
   tr.appendChild(td_request);
-  tr.appendChild(td_tablenumber);
+  // tr.appendChild(td_tablenumber);
   // tr.appendChild(td_weekday);
-
   tbl_booking_list.appendChild(tr);
-
 }
+
+
 
 // <script>현재시간 표시
 var today = new Date();
@@ -138,38 +136,19 @@ $(function() {
       $("#day").val(day);
       // alert("date:" + date.getDay());
       var selecteddate = $(this).val();
-      console.log(selecteddate)
+      console.log("selected date:" + selecteddate)
       // var selecteddate = print(k)
 
-      db.collection("booking").where("date", "==", selecteddate).orderBy("Bookedtime2", "desc").onSnapshot(snapshot => {
-        let changes = snapshot.docChanges();
         console.log("날짜선택시")
         //테이블 내용을 지움
-                    document.getElementById("tbl_booking_list").innerHTML = "";
-                    //테이블 헤드를 다시 씀
-                    renderTableHead();
-        changes.forEach(change => {
-          // console.log(change.doc.data());
-          if (change.type == 'added') {
-            renderBooking(change.doc);
-          } else if (change.type == 'removed') {
-            let tr = tbl_booking_list.querySelector('[data-id=' + change.doc.id + ']');
-            tbl_booking_list.removeChild(tr);
-            document.getElementById("tbl_booking_list").innerHTML = "";
-            renderTableHead();
-            renderBooking(change.doc);
-            // location.reload(true);
+                    // document.getElementById("tbl_booking_list").innerHTML = "";
+                    // //테이블 헤드를 다시 씀
+                    // renderTableHead();
 
-          }
-        });
-      });
     }
   });
 });
 // </script>
-
-const form = document.querySelector('#add-booking-form');
-const tbl_booking_list = document.querySelector('#tbl_booking_list');
 
 
 //     // deleting data
@@ -186,19 +165,19 @@ const tbl_booking_list = document.querySelector('#tbl_booking_list');
 //         renderBooking(doc);
 //     });
 // });
-
-//==========================================첫 화면에서 오늘 날짜의 부킹만 보여줌
-// function firstPage() {
-  db.collection("booking").where("date_no_weekday", "==", date).get().then(snapshot => {
-    console.log("첫화면에서 보여지는 날짜: " + date);
-    renderTableHead();
-    snapshot.docs.forEach(doc => {
-      renderBooking(doc);
-    });
-  });
-// }
-//==========================================첫 화면에서 오늘 날짜의 부킹만 보여줌
-
+//
+// //==========================================첫 화면에서 오늘 날짜의 부킹만 보여줌
+// // function firstPage() {
+//   db.collection("booking").where("date_no_weekday", "==", date).get().then(snapshot => {
+//     console.log("첫화면에서 보여지는 날짜: " + date);
+//     renderTableHead();
+//     snapshot.docs.forEach(doc => {
+//       renderBooking(doc);
+//     });
+//   });
+// // }
+// //==========================================첫 화면에서 오늘 날짜의 부킹만 보여줌
+//
 
 
 // saving data
@@ -222,7 +201,6 @@ form.addEventListener('submit', (e) => {
     Bookedtime2: firebase.firestore.Timestamp.fromDate(new Date(form.date.value))
     //부킹된 s날짜를 타임스탬프로 기록
   });
-
   alert("date: " + form.date.value + " Name: " + form.name.value + " Weekday: " + form.weekday.value);
   form.date.value = '';
   form.name.value = '';
@@ -236,11 +214,30 @@ form.addEventListener('submit', (e) => {
   form.time.value = '';
   form.day.value = '';
   console.log("파이어스토어에 데이터 저장됨")
-});
+var selecteddate = date;
+  db.collection("booking").where("date", "==", selecteddate).onSnapshot(snapshot => {
+    let changes = snapshot.docChanges();
+              document.getElementById("tbl_booking_list").innerHTML = "";
+              renderTableHead();
+              renderBooking(change.doc);
+              console.log("부킹했을때인가?")
+            // }
+            // else if (change.type == 'removed') {
+            //   let tr = tbl_booking_list.querySelector('[data-id=' + change.doc.id + ']');
+            //   tbl_booking_list.removeChild(tr);
+            //   document.getElementById("tbl_booking_list").innerHTML = "";
+            //   renderTableHead();
+            //   renderBooking(change.doc);
+            //   // location.reload(true);
+            //
+            // }
+          });
+        });
+
 
 //
 // //
-// // //모든 부킹을 다 보여주는데, 정렬은 부킹된 날짜순, 앞으로의 부킹이 위로 오도록
+// //모든 부킹을 다 보여주는데, 정렬은 부킹된 날짜순, 앞으로의 부킹이 위로 오도록
 // db.collection("booking").orderBy("Bookedtime2", "desc").onSnapshot(snapshot => {
 //     let changes = snapshot.docChanges();
 //     console.log("날짜선택시")
@@ -266,3 +263,6 @@ form.addEventListener('submit', (e) => {
 //         }
 //     });
 // });
+
+
+document.querySelector(data-id)

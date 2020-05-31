@@ -68,15 +68,15 @@
 <script>
       $(function() {
         $("#date").datepicker({
-          dateFormat: "dd-M-yy-D",
+          dateFormat: "D-dd-M-yy",
           dayNamesMin: ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"],
           monthNames: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
           onSelect: function(d) {
             var arr = d.split("-");
-            var year = arr[2];
-            var month = arr[1];
-            var day = arr[0];
-            var weekday = arr[3];
+            var year = arr[3];
+            var month = arr[2];
+            var day = arr[1];
+            var weekday = arr[0];
             var date = new Date($("#date").datepicker({
               dateFormat: "dd-M-yy"
             }).val());  //일요일 0~   // alert("date:" + date.getDay()); //

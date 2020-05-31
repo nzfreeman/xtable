@@ -56,11 +56,11 @@ function renderBooking(doc){
 }
 
 // getting data
-db.collection('booking').doc().get().then(snapshot => {
-    snapshot.docs.forEach(doc => {
-        renderBooking(doc);
-    });
-});
+// db.collection('booking').doc().get().then(snapshot => {
+//     snapshot.docs.forEach(doc => {
+//         renderBooking(doc);
+//     });
+// });
 
 // saving data
 form.addEventListener('submit', (e) => {
@@ -95,6 +95,7 @@ db.collection('booking').orderBy('date').onSnapshot(snapshot => {
         // console.log(change.doc.data());
         if(change.type == 'added'){
             renderBooking(change.doc);
+            console.log('data-id');
         } else if (change.type == 'removed'){
             let li = bookingList.querySelector('[data-id=' + change.doc.id + ']');
             bookingList.removeChild(li);

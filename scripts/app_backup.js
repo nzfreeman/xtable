@@ -29,7 +29,7 @@ function renderTableHead(){
   let th_request = document.createElement('th');
   let th_tablenumber = document.createElement('th');
   let th_time = document.createElement('th');
-  let th_edit = document.createElement('th');
+  // let th_weekday = document.createElement('th');
   th_date.textContent = "Date";
   th_name.textContent = "Name";
   th_phone.textContent = "Phone";
@@ -37,7 +37,7 @@ function renderTableHead(){
   th_request.textContent = "Request";
   th_time.textContent = "Time";
   th_tablenumber.textContent = "Table Number";
-  th_edit.textContent = "Edit";
+  // th_weekday.textContent = "Weekday";
   thead.appendChild(th_date);
   thead.appendChild(th_time);
   thead.appendChild(th_name);
@@ -45,7 +45,7 @@ function renderTableHead(){
   thead.appendChild(th_partysize);
   thead.appendChild(th_request);
   thead.appendChild(th_tablenumber);
-  thead.appendChild(th_edit);
+  // thead.appendChild(th_weekday);
   tbl_booking_list.appendChild(thead);
 }
 
@@ -64,14 +64,7 @@ function renderBooking(doc) {
   let td_request = document.createElement('td');
   let td_tablenumber = document.createElement('td');
   let td_time = document.createElement('td');
-  let td_edit = document.createElement('td'); //edit창 테이블 생성변수 //테이블안에 div생성변수
-
-  // let td_div = document.createElement('div');
-  // let td_button = document.createElement('button');
-  //button 생성 변수
-
-
-
+  // let td_weekday = document.createElement('td');
   tr.setAttribute('data-id', doc.id);
   td_date.textContent = doc.data().date;
   td_time.textContent = doc.data().time;
@@ -80,21 +73,7 @@ function renderBooking(doc) {
   td_partysize.textContent = doc.data().partysize;
   td_request.textContent = doc.data().request;
   td_tablenumber.textContent = doc.data().tablenumber;
-  let btn = document.createElement('input');
-  btn.type = "button";
-  btn.className = "edit_btn";
-  btn.value = "Update";
-  btn.onclick = function edit_booking() {
-    let id = document.parentElement.getAttribute('data-id');
-    db.collection('booking').doc(id).delete();
-      }
-  td_edit.appendChild(btn);
-  // //Edit 테이블에 들어갈 내용
-  // td_edit.td_div="test";
-  // td_edit.textContent = "edit";
-  // td_button.innerHTML="Editbutton";
-  // td_edit.setAttribute("type", "button");
-
+  // td_weekday.textContent = doc.data().weekday;
   tr.appendChild(td_date);
   tr.appendChild(td_time);
   tr.appendChild(td_name);
@@ -102,7 +81,8 @@ function renderBooking(doc) {
   tr.appendChild(td_partysize);
   tr.appendChild(td_request);
   tr.appendChild(td_tablenumber);
-  tr.appendChild(td_edit);
+  // tr.appendChild(td_weekday);
+
   tbl_booking_list.appendChild(tr);
 
 }

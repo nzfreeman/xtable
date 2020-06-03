@@ -263,6 +263,3 @@ var selecteddate = date;
 //         }
 //     });
 // });
-
-
-document.querySelector(data-id)
